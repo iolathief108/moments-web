@@ -1,0 +1,462 @@
+mutation vendorLoginOtp($phone: String!){
+    vendorLoginOtp(phone: $phone)
+
+}
+
+mutation vendorLogin($phone: String!, $password: String!) {
+    vendorLogin(phone: $phone, password: $password)
+}
+
+query getVendorProfileId {
+    vendorProfile {
+        id
+    }
+}
+
+query getVendorProfile {
+    vendorProfile {
+        id
+        firstName
+        lastName
+        email
+        phone
+        verified
+    }
+}
+
+mutation vendorLogout {
+    vendorLogout
+}
+
+query isVendorPhoneExist($phone: String!) {
+    isVendorPhoneExist(phone: $phone)
+}
+
+mutation vendorRegisterOtp($phone: String!) {
+    vendorRegisterOtp(phone: $phone)
+}
+
+mutation vendorRegister($firstName: String!, $lastName: String!, $phone: String!, $password: String!, $authCode: String!) {
+    vendorRegister(firstName: $firstName, lastName: $lastName, phone: $phone, password: $password, authCode: $authCode)
+}
+
+mutation editVendorDetails(
+    $businessName: String
+    $vendorType: VendorType
+    $address: String
+    $galleryPhotos: [GalleryPhotoInput!]
+    $frequentQuestion: [ FrequentQuestionInput! ]
+    $geo: GeoInput
+    $phone: String
+    $cityIds: [String!]
+    $facebook: String
+    $pinterest: String
+    $instagram: String
+    $website: String
+    $claps: [ClapInput!]
+    $description: String
+
+    $catererDetails: CatererDetailsInput
+    $photographerDetails: PhotographerDetailsInput 
+    $venueDetails: VenueDetailsInput
+    $videographerDetails: VideographerDetailsInput
+    $bandDjsDetails: BandDjsDetailsInput
+    $beautyProfessionalsDetails: BeautyProfessionalDetailsInput
+    $cakesDessertsDetails: CakesDessertsDetailsInput
+    $floristsDetails: FloristsDetailsInput
+){
+    vendorEditDetails(data: {
+        catererDetails: $catererDetails
+        photographerDetails: $photographerDetails
+        venueDetails: $venueDetails
+        videographerDetails: $videographerDetails
+        bandDjsDetails: $bandDjsDetails
+        beautyProfessionalDetails: $beautyProfessionalsDetails
+        cakesDessertsDetails: $cakesDessertsDetails
+        floristsDetails: $floristsDetails
+
+        businessName: $businessName 
+        vendorType: $vendorType
+        address: $address
+        facebook: $facebook
+        gallery_photos: $galleryPhotos
+        frequentQuestion: $frequentQuestion
+        geo: $geo
+        instagram: $instagram
+        phone: $phone
+        pinterest: $pinterest
+        cityIDs: $cityIds
+        website: $website
+        claps: $claps
+        description: $description
+    })
+}
+
+query getVendorDetailsExtra {
+    vendorDetailsExtra {
+        phone
+        description
+        address
+        listingStatus
+        reason
+        isLive
+        vendorTypes {
+
+            caterer_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+            beauty_professionals_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+            venue_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+            }
+
+            photographer_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+            videographer_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+            band_djs_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+
+            florists_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+            cakes_desserts_type{
+                pricing{
+                    min_price
+                    packages{
+                        name
+                        short
+                        min_price
+                        description
+                        price {
+                            name
+                            price_type
+                            fixed {
+                                price
+                            }
+                            range {
+                                from_price
+                                to_price
+                            }
+                            starting{
+                                price
+                            }
+                            unit 
+                        }
+                    }
+                }
+
+                personInfo {
+                    name
+                    position
+                    person_photo{
+                        ht
+                        wd
+                        id
+                    }
+                }
+            }
+
+        }
+        searchLocations {
+            name
+            key
+            cities {
+                name
+                key
+            }
+        }
+        geo {
+            latitude
+            longitude
+        }
+        frequent_questions {
+            question
+            answer
+        }
+        vendor_type 
+        links {
+            facebook
+            instagram
+            pinterest
+            website
+        }
+        business_name
+        galleryPhoto {
+            ht
+            wd
+            id
+        }
+        claps {
+            name
+            key
+            values
+        }
+        isComplete
+    }
+}
+
+query getInitialData {
+    vendorDetailsExtra{
+        business_name
+        vendor_type
+    }
+}
+
+query getDistricts {
+    districts {
+        id
+        name
+        key
+        parent_id
+    }
+}
+
+query getCities($districtId: String!) {
+    cities(districts_id: $districtId) {
+        id
+        name
+        key
+        parent_id
+    }
+}
+
+query getClapStore($vendorType: VendorType!) {
+    clapStore(vendorType: $vendorType){
+        name
+        key
+        values
+    }
+}
