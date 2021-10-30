@@ -32,12 +32,12 @@ const Content = ({data}: {data: VendorDetailsBQuery}) => {
                 {/*<Thing iconClassName={'fa fa-map-marker'} title={'Address'}*/}
                 {/*       val={'91/16, Dematagoda Road, Colombo-10.'}/>*/}
                 <Thing iconClassName={'fa fa-phone'} title={'Phone'}
-                       val={<a style={{color: 'rgb(34 124 255 / 91%)'}} href="tel://+94775737981">+94 77 5737 981</a>}/>
+                       val={<a style={{color: 'rgb(34 124 255 / 91%)'}} href="tel://+94775737981">077 5737 981</a>}/>
                 <Thing iconClassName={'fa fa-paper-plane'}
                        title={'Email'}
                        val={
                            <a style={{color: 'rgb(34 124 255 / 91%)'}}
-                              href="mailto:momentslk21@gmail.com">momentslk21@gmail.com</a>
+                              href="mailto:support@moments.lk">support@moments.lk</a>
                        }/>
                 {/*<Thing iconClassName={'fa fa-globe'} title={'Website'} val={<a href="#">yoursite.com</a>}/>*/}
             </div>
@@ -63,7 +63,7 @@ const CloseButton = () => {
 
 export function ContactPopup({data}: {data: VendorDetailsBQuery}) {
     return (
-        <div>
+        <>
             <div style={{
                 position: 'fixed',
                 maxWidth: isMobile ? '100%' : '80%',
@@ -72,7 +72,7 @@ export function ContactPopup({data}: {data: VendorDetailsBQuery}) {
                 maxHeight: isMobile ? '100%' : '70%',
                 height: isMobile ? '100%' : undefined,
                 paddingBottom: '30px',
-                zIndex: 20,
+                zIndex: 90,
                 top: isMobile ? '0px' : '100px',
                 transform: 'translateX(-50%)',
                 left: '50%',
@@ -91,7 +91,7 @@ export function ContactPopup({data}: {data: VendorDetailsBQuery}) {
                 </div>
                 <div className={''} style={{
                     marginTop: '15px',
-                    padding: '10px 40px 10px 40px',
+                    padding: '30px 40px 30px 40px',
                 }}>
                     <h4>Contact Us</h4>
                     <p style={{
@@ -106,9 +106,9 @@ export function ContactPopup({data}: {data: VendorDetailsBQuery}) {
                 left: 0,
                 height: '100%',
                 width: '100%',
-                zIndex: 19,
+                zIndex: 89,
                 backgroundColor: '#0004',
             }} onClick={() => contactPopupState.setGlobalState('contactPopupActive', false)}/>
-        </div>
+        </>
     );
 }

@@ -18,7 +18,7 @@ const Item = ({url}: ItemProps) => {
                     <img className={'h-25'} width={'100%'}
                          style={{objectFit: 'cover', minHeight: '310px', maxHeight: '500px'}} src={url}/> :
                     <img style={{
-                        maxHeight: '600px',
+                        maxHeight: '470px',
                         width: '100%',
                         objectFit: 'cover',
                     }} src={url}/>
@@ -39,7 +39,7 @@ export function Carousel(props: CarouselProps) {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        // autoplay: true, //todo: important
+        autoplay: true,
         arrows: false,
         autoplaySpeed: 5000,
     };

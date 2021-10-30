@@ -11,6 +11,8 @@ import TermsOfUse from "./sections/terms";
 import Search from "./search";
 import StoreFront from "./store-front";
 import ScrollToTop from './utils/scroll-top';
+import styled from "styled-components";
+import {Link} from 'react-router-dom'
 
 
 function Routes() {
@@ -22,6 +24,7 @@ function Routes() {
             <Route exact path="/wedding-vendors/:cat/:id/" children={<StoreFront />} />
 
             <Route exact path="/contact-us/" children={<ContactUs />} />
+            <Route exact path="/become-a-vendor/" children={<ContactUs />} />
             <Route exact path="/dev" children={<Dev />} />
             <Route exact path="/terms-of-use/" children={<TermsOfUse />} />
 
@@ -42,9 +45,45 @@ export default function App() {
 }
 
 function NotFound() {
+    const Container = styled.div`
+      h1 {
+        font-size: 80px;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      a {
+        color: #35b2ee;
+        font-weight: bold;
+
+        &:hover {
+          color: #73cde7
+        }
+      }
+
+      h2 {
+        font-size: 25px;
+        text-align: center;
+        margin-top: -10px;
+      }
+
+      p {
+        text-align: center;
+      }
+
+      .container {
+        max-width: 360px;
+        margin: 15% auto;
+      }
+    `
     return (
-        <div>
-            <h2>hey you are entered on 404 page fuck you</h2>
-        </div>
+        <Container>
+            <div className="container">
+                <h1>404</h1>
+                <h2>Page Not Found</h2>
+                <p>The Page you are looking for doesn't exist or an other error occured. Go to <Link to="/">Home Page.</Link>
+                </p>
+            </div>
+        </Container>
     );
 }

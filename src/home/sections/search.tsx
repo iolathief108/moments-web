@@ -3,7 +3,7 @@ import {getDistrictId, getVendorTypeInfo, localVendorTypes} from '../../utils/ot
 import {useState} from 'react';
 import {VendorType} from '../../http/generated';
 import sdk from '../../http/sdk';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import {searchState} from '../../state';
 import 'react-select-search/style.css';
 import {CarouselMulti} from '../common/carousel-multi';
@@ -125,7 +125,7 @@ type Props = {
 
 export function Damn(props: Props) {
     return (
-        <a style={{
+        <Link style={{
             display: 'inline-flex',
             borderRadius: '40px',
             backgroundColor: '#fff',
@@ -136,8 +136,8 @@ export function Damn(props: Props) {
             fontWeight: 500,
             fontSize: '14px',
             fontFamily: 'roboto, sans-serif'
-        }} href={props.url}
-           target={'_blank'}
+        }} to={props.url}
+           // target={'_blank'}
         >
             <img
                 src={props.img}
@@ -146,7 +146,7 @@ export function Damn(props: Props) {
                 style={{marginRight: '3px'}}
             />
             <span style={{alignSelf: 'center'}}>{props.name}</span>
-        </a>
+        </Link>
     );
 }
 

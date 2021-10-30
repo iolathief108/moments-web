@@ -1,7 +1,7 @@
 import Slider, { Settings } from "react-slick";
 import { commonState } from "../../state";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 
 type ItemProps = {
@@ -10,15 +10,28 @@ type ItemProps = {
     link: string
 }
 const Item = ({ img, name, link }: ItemProps) => {
+    const [mousePos, setMousePos] = useState<number>(undefined);
     const [isMobile] = commonState.useGlobalState("isMobile");
+    const history = useHistory();
+
     if (isMobile === undefined) return null;
 
     return (
-        <Link to={link} style={{
-            width: isMobile ? "240px" : null
-        }} target={!isMobile && "_blank"}>
+        <a
+            onClick={e => {
+                if (mousePos === undefined || mousePos === e.clientX) {
+                    history.push(link);
+                }
+
+            }}
+            onMouseDown={e => {
+                setMousePos(e.clientX);
+            }}
+            style={{
+                width: isMobile ? "240px" : null
+            }}>
             <div className={"pl-2 pr-2 pt-2 pb-2"} style={{ cursor: "pointer", display: "inline-block" }}>
-                <div className={"helldd"} style={{
+                <div style={{
                     boxShadow: "1px 2px 6px 0px #00000029",
                     borderRadius: "5px",
                     backgroundColor: "#fff"
@@ -43,7 +56,7 @@ const Item = ({ img, name, link }: ItemProps) => {
                     </div>
                 </div>
             </div>
-        </Link>
+        </a>
     );
 };
 

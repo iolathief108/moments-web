@@ -3,13 +3,13 @@ type propsThing = {
     title: string, val: any
 }
 
-function Thing(props: propsThing) {
+function Row(props: propsThing) {
     return (
         <div className="dbox w-100 d-flex align-items-start pb-3">
             <div className="icon d-flex align-items-center justify-content-center mt-1">
                 <span className={props.iconClassName}></span>
             </div>
-            <div className="text pl-3">
+            <div className="text pl-3 text-left">
                 <p style={{fontFamily: 'roboto, sans-serif'}}>
                     <span className={'font-weight-bold'}>{props.title}:</span> <span style={{color: typeof props.val !== 'string' && 'rgb(34 124 255 / 91%)'}}>{props.val}</span>
                 </p>
@@ -49,12 +49,12 @@ export default function ContactUs() {
             <Container>
                 {/*<h3 className="mb-4 mt-md-4">Contact us</h3>*/}
                 <div style={{fontSize: '1.1rem'}}>
-                    <Thing iconClassName={'fa fa-map-marker'} title={'Address'}
+                    <Row iconClassName={'fa fa-map-marker'} title={'Address'}
                            val={'91/16, Dematagoda Road, Colombo 10.'}/>
-                    <Thing iconClassName={'fa fa-phone'} title={'Phone'}
+                    <Row iconClassName={'fa fa-phone'} title={'Phone'}
                            val={<a href="tel://+94775737981">+94 77 573 7981</a>}/>
-                    <Thing iconClassName={'fa fa-paper-plane'} title={'Email'} val={<a
-                        href="mailto:momentslk21@gmail.com">momentslk21@gmail.com</a>}/>
+                    <Row iconClassName={'fa fa-paper-plane'} title={'Email'} val={<a
+                        href="mailto:support@moments.lk">support@moments.lk</a>}/>
                     {/*<Thing iconClassName={'fa fa-globe'} title={'Website'} val={<a href="#">yoursite.com</a>}/>*/}
                 </div>
             </Container>

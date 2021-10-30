@@ -4,6 +4,7 @@ import { commonState } from "../../state";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { EnvironmentTypes, getEnvironmentByHostname, isDev } from "../../utils/pageUtils";
+import { LIGHT_BLUE_COLOR } from "../../utils/colors";
 
 
 const Name = styled.div`
@@ -81,7 +82,7 @@ const Container = styled.div`
 
   @media (min-width: 767px) {
     a:hover .business-name{
-        color: inherit;
+        color: ${LIGHT_BLUE_COLOR};
     }
   }
 `

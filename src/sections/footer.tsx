@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
-import {getCategoryUrl} from '../utils/other';
-import {VendorType} from '../http/generated';
-import {businessName} from '../shared';
+import { Link } from 'react-router-dom';
+import { getCategoryUrl } from '../utils/other';
+import { VendorType } from '../http/generated';
+import { businessName } from '../shared';
 
 
 export function Footer() {
@@ -12,8 +12,8 @@ export function Footer() {
                     <div className="row">
                         <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                             <div className="footer-widget">
-                                <a href="#"><img src="/images/logo.png" alt="" className="mb20"/></a>
-                                <p className="mb10">Directory listing website for wedding vendors.</p>
+                                <a href="#"><img src="/images/logo-large3.png" height="35px" alt="" className="mb20" /></a>
+                                <p className="mt-2">Directory listing website for wedding vendors.</p>
                             </div>
                         </div>
                         <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
@@ -54,7 +54,7 @@ export function Footer() {
                                 </h3>
                                 <p>Are you vendor ? List your venue and service get more from listing business.</p>
                                 {/*<a style={{marginRight: '20px'}} href="/dev" target='_blank' className="btn btn-default">List your Business</a>*/}
-                                <a href="/dash" target='_blank' className="btn btn-secondary">Dash Login</a>
+                                <a href="/dash" target='_blank' className="btn btn-default btn-sm mt-3 mt-lg-0">Vendor Login</a>
                             </div>
                         </div>
                     </div>

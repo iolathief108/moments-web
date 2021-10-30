@@ -13,7 +13,7 @@ function Thing(props: ThingProps) {
     const [isMobile] = commonState.useGlobalState("isMobile");
 
     return (
-        <Link to={props.link} target={isMobile ? null : "_blank"} className={"col-sm-4 col-lg-3 pb-md-4"}
+        <Link to={props.link} className={"col-sm-4 col-lg-3 pb-md-4"}
               style={{ cursor: "pointer", marginBottom: "10px" }}>
             <div className={"row text-sm-center"}>
                 <span className={"col-3 col-sm-12 d-flex justify-content-center pb-sm-2"}>

@@ -55,16 +55,19 @@ const CarWrap = () => {
     const [isMobile] = commonState.useGlobalState('isMobile');
 
     const heroImageUrls = [
-        'https://zola-web-assets.imgix.net/web-home/vmassets/static/media/hero4.2263b6d6.jpg',
-        'https://zola-web-assets.imgix.net/web-home/vmassets/static/media/hero5.0158cff6.jpg',
-        'https://zola-web-assets.imgix.net/web-home/vmassets/static/media/hero1.6bfad5ba.jpg',
+        '/images/hero/hero (1).jpg',
+        '/images/hero/hero (2).jpg',
+        '/images/hero/hero (3).jpg',
+        '/images/hero/hero (4).jpg',
+        '/images/hero/hero (5).jpg',
+        '/images/hero/hero (6).jpg',
     ];
 
     const mobileThing = [
-        '/images/hero-mob/hero (1).jpg',
-        '/images/hero-mob/hero (2).jpg',
-        '/images/hero-mob/hero (3).jpg',
-        '/images/hero-mob/hero (4).jpg',
+        '/images/hero/hero (1).jpg',
+        '/images/hero/hero (2).jpg',
+        '/images/hero/hero (3).jpg',
+        '/images/hero/hero (4).jpg',
     ];
 
     if (isMobile === undefined) return null;
@@ -101,10 +104,10 @@ export function Hero() {
         return (
             <span>
                 <div className={'row'}>
-                    <div className={'col-12 col-md-5 col-lg-4 col-xl-3 p-4 px-sm-5 px-xl-2 pt-xl-5 pr-md-2'}>
+                    <div className={'col-12 col-md-6 col-lg-5 col-xl-4 p-4 px-sm-5 px-xl-2 pt-xl-5 pr-md-2'}>
                         <SideText/>
                     </div>
-                    <div className={'col-12 col-md-7 col-lg-8 col-xl-9'}>
+                    <div className={'col-12 col-md-6 col-lg-7 col-xl-8'}>
                         <CarWrap/>
                     </div>
                 </div>
