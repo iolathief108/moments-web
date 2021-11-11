@@ -14,9 +14,13 @@ specifiers:
   '@types/react-dom': ^17.0.0
   '@types/react-helmet': ^6.1.4
   '@types/react-router-dom': ^5.3.1
+  '@types/react-slick': ^0.23.7
   '@types/styled-components': ^5.1.15
+  '@u-wave/react-vimeo': ^0.9.5
+  axios: ^0.24.0
   fetch-graphql-schema: ^0.2.1
   graphql: ^15.6.1
+  graphql-codegen-plugin-typescript-swr: git+https://github.com/ioLathief/graphql-codegen-plugin-typescript-swr.git
   graphql-request: ^3.6.1
   graphql-tag: ^2.12.5
   normalize.css: ^8.0.1
@@ -54,9 +58,13 @@ dependencies:
   '@types/react-dom': 17.0.10
   '@types/react-helmet': 6.1.4
   '@types/react-router-dom': 5.3.1
+  '@types/react-slick': 0.23.7
   '@types/styled-components': 5.1.15
+  '@u-wave/react-vimeo': 0.9.5_react@17.0.2
+  axios: 0.24.0
   fetch-graphql-schema: 0.2.1
   graphql: 15.6.1
+  graphql-codegen-plugin-typescript-swr: github.com/ioLathief/graphql-codegen-plugin-typescript-swr/ba62844dc5d0ffdc3de00b8b94f0f2fe12421c58_graphql@15.6.1+react@17.0.2
   graphql-request: 3.6.1_graphql@15.6.1
   graphql-tag: 2.12.5_graphql@15.6.1
   normalize.css: 8.0.1
@@ -81,6 +89,13 @@ dependencies:
   web-vitals: 1.1.2
 
 packages:
+
+  /@ardatan/aggregate-error/0.0.6:
+    resolution: {integrity: sha512-vyrkEHG1jrukmzTPtyWB4NLPauUw5bQeg4uhn8f+1SSynmrOcyvlb1GKQjjgoBzElLdfXCRYX8UnBlhklOHYRQ==}
+    engines: {node: '>=8'}
+    dependencies:
+      tslib: 2.0.3
+    dev: false
 
   /@babel/code-frame/7.10.4:
     resolution: {integrity: sha512-vG6SvB6oYEhvgisZNFRmRCUkLz11c7rp+tbNTynGqc6mS1d5ATd/sGyV6W0KZZnXRKMTzZDRgQT3Ou9jhpAfUg==}
@@ -1730,6 +1745,19 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@graphql-codegen/plugin-helpers/1.18.8_graphql@15.6.1:
+    resolution: {integrity: sha512-mb4I9j9lMGqvGggYuZ0CV+Hme08nar68xkpPbAVotg/ZBmlhZIok/HqW2BcMQi7Rj+Il5HQMeQ1wQ1M7sv/TlQ==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+    dependencies:
+      '@graphql-tools/utils': 7.10.0_graphql@15.6.1
+      common-tags: 1.8.0
+      graphql: 15.6.1
+      import-from: 4.0.0
+      lodash: 4.17.21
+      tslib: 2.3.1
+    dev: false
+
   /@graphql-codegen/plugin-helpers/2.2.0_graphql@15.6.1:
     resolution: {integrity: sha512-7t3LFd6DHUWPh0f7qY7wde2r4KCsU8WDcTxQ0QuHuokTqZYnRk+UH3xNDUiyb+1LGTBUqIaKxLwQXh8EDyZK7A==}
     peerDependencies:
@@ -1786,6 +1814,26 @@ packages:
       '@graphql-codegen/visitor-plugin-common': 2.4.0_graphql@15.6.1
       auto-bind: 4.0.0
       graphql: 15.6.1
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@graphql-codegen/visitor-plugin-common/1.22.0_graphql@15.6.1:
+    resolution: {integrity: sha512-2afJGb6d8iuZl9KizYsexPwraEKO1lAvt5eVHNM5Xew4vwz/AUHeqDR2uOeQgVV+27EzjjzSDd47IEdH0dLC2w==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+    dependencies:
+      '@graphql-codegen/plugin-helpers': 1.18.8_graphql@15.6.1
+      '@graphql-tools/optimize': 1.1.0_graphql@15.6.1
+      '@graphql-tools/relay-operation-optimizer': 6.4.0_graphql@15.6.1
+      array.prototype.flatmap: 1.2.5
+      auto-bind: 4.0.0
+      change-case-all: 1.0.14
+      dependency-graph: 0.11.0
+      graphql: 15.6.1
+      graphql-tag: 2.12.5_graphql@15.6.1
+      parse-filepath: 1.0.2
       tslib: 2.3.1
     transitivePeerDependencies:
       - supports-color
@@ -2066,6 +2114,17 @@ packages:
       - '@types/node'
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /@graphql-tools/utils/7.10.0_graphql@15.6.1:
+    resolution: {integrity: sha512-d334r6bo9mxdSqZW6zWboEnnOOFRrAPVQJ7LkU8/6grglrbcu6WhwCLzHb90E94JI3TD3ricC3YGbUqIi9Xg0w==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0
+    dependencies:
+      '@ardatan/aggregate-error': 0.0.6
+      camel-case: 4.1.2
+      graphql: 15.6.1
+      tslib: 2.2.0
     dev: false
 
   /@graphql-tools/utils/8.4.0_graphql@15.6.1:
@@ -2849,6 +2908,12 @@ packages:
       '@types/react': 17.0.31
     dev: false
 
+  /@types/react-slick/0.23.7:
+    resolution: {integrity: sha512-v5/puo5Ix+ZeWNo2wqzfEP5CaTtEMU3qByESGt3brp98mIyKhssNaB2hgGrshu+lHAXkV1ku78Tea6FtztyXug==}
+    dependencies:
+      '@types/react': 17.0.31
+    dev: false
+
   /@types/react/17.0.31:
     resolution: {integrity: sha512-MQSR5EL4JZtdWRvqDgz9kXhSDDoy2zMTYyg7UhP+FZ5ttUOocWyxiqFJiI57sUG0BtaEX7WDXYQlkCYkb3X9vQ==}
     dependencies:
@@ -2897,6 +2962,10 @@ packages:
     resolution: {integrity: sha512-O3MmRAk6ZuAKa9CHgg0Pr0+lUOqoMLpc9AS4R8ano2auvsg7IE8syF3Xh/NPr26TWklxYcqoEEFdzLLs1fV9PQ==}
     dependencies:
       source-map: 0.6.1
+    dev: false
+
+  /@types/vimeo__player/2.10.1:
+    resolution: {integrity: sha512-PgmJmOFlkr1r/1bomlTAEY7yuJNM447DqBem1CLNmSefs8ILE/e3e0Ey07GcZK0NujWW/m3kyv1kIhtLh/iu/A==}
     dev: false
 
   /@types/webpack-sources/3.2.0:
@@ -3095,6 +3164,25 @@ packages:
     dependencies:
       '@typescript-eslint/types': 4.33.0
       eslint-visitor-keys: 2.1.0
+    dev: false
+
+  /@u-wave/react-vimeo/0.9.5_react@17.0.2:
+    resolution: {integrity: sha512-dPJ/lbBu4PI3fVrpauFuLheG7Pc6kJVRpt+DA0qCHY9nfSGL2vmN/JONFc9LkqkAEnFocf00+ytg9BK+GWGtzg==}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      '@types/react': 17.0.31
+      '@types/vimeo__player': 2.10.1
+      '@vimeo/player': 2.16.1
+      prop-types: 15.7.2
+      react: 17.0.2
+    dev: false
+
+  /@vimeo/player/2.16.1:
+    resolution: {integrity: sha512-47pUwVFAYBKbmOpxF6CzQc0VwbVi7LCv8i1H44XgRRoMoI7jwAOSi4CDGinjEMoKOKxsn5/p8ze50XZYwgTVWA==}
+    dependencies:
+      native-promise-only: 0.8.1
+      weakmap-polyfill: 2.0.1
     dev: false
 
   /@webassemblyjs/ast/1.9.0:
@@ -3642,6 +3730,14 @@ packages:
   /axe-core/4.3.3:
     resolution: {integrity: sha512-/lqqLAmuIPi79WYfRpy2i8z+x+vxU3zX2uAm0gs1q52qTuKwolOj1P8XbufpXcsydrpKx2yGn2wzAnxCMV86QA==}
     engines: {node: '>=4'}
+    dev: false
+
+  /axios/0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.14.4_debug@4.3.2
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /axobject-query/2.2.0:
@@ -9541,6 +9637,10 @@ packages:
       to-regex: 3.0.2
     dev: false
 
+  /native-promise-only/0.8.1:
+    resolution: {integrity: sha1-IKMYwwy0X3H+et+/eyHJnBRy7xE=}
+    dev: false
+
   /native-url/0.2.6:
     resolution: {integrity: sha512-k4bDC87WtgrdD362gZz6zoiXQrl40kYlBmpfmSjwRO1VU0V5ccwJTlxuE72F6m3V0vc1xOf6n3UCP9QyerRqmA==}
     dependencies:
@@ -13395,6 +13495,14 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: false
 
+  /tslib/2.0.3:
+    resolution: {integrity: sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==}
+    dev: false
+
+  /tslib/2.2.0:
+    resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
+    dev: false
+
   /tslib/2.3.1:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: false
@@ -13818,6 +13926,11 @@ packages:
     resolution: {integrity: sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==}
     dependencies:
       minimalistic-assert: 1.0.1
+    dev: false
+
+  /weakmap-polyfill/2.0.1:
+    resolution: {integrity: sha512-Jy177Lvb1LCrPQDWJsXyyqf4eOhcdvQHFGoCqSv921kVF5i42MVbr4e2WEwetuTLBn1NX0IhPzTmMu0N3cURqQ==}
+    engines: {node: '>=8.10.0'}
     dev: false
 
   /web-vitals/1.1.2:
@@ -14393,4 +14506,26 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: false
+
+  github.com/ioLathief/graphql-codegen-plugin-typescript-swr/ba62844dc5d0ffdc3de00b8b94f0f2fe12421c58_graphql@15.6.1+react@17.0.2:
+    resolution: {tarball: https://codeload.github.com/ioLathief/graphql-codegen-plugin-typescript-swr/tar.gz/ba62844dc5d0ffdc3de00b8b94f0f2fe12421c58}
+    id: github.com/ioLathief/graphql-codegen-plugin-typescript-swr/ba62844dc5d0ffdc3de00b8b94f0f2fe12421c58
+    name: graphql-codegen-plugin-typescript-swr
+    version: 0.6.1
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+    dependencies:
+      '@graphql-codegen/plugin-helpers': 1.18.8_graphql@15.6.1
+      '@graphql-codegen/visitor-plugin-common': 1.22.0_graphql@15.6.1
+      auto-bind: 4.0.0
+      graphql: 15.6.1
+      graphql-request: 3.6.1_graphql@15.6.1
+      micromatch: 4.0.4
+      pascal-case: 3.1.2
+      swr: 0.5.7_react@17.0.2
+      tslib: 2.3.1
+    transitivePeerDependencies:
+      - react
+      - supports-color
     dev: false

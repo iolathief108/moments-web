@@ -15,6 +15,7 @@ query VendorSearch($after: String, $searchQuery: String, $districtID: String, $v
             cursor
             node {
                 business_name
+                business_name_slug
                 id
                 gallery_photos {
                     id

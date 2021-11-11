@@ -9,7 +9,7 @@ import { VendorCard } from "./vendor-card";
 import { searchState } from "../../state";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getWindowDimensions } from "../../utils/useWindowDimentions";
+import { LoadingPage } from "../../comps/loading";
 
 
 const getKey: SWRInfiniteKeyLoader<VendorSearchQuery, VendorSearchQueryVariables> = (pageIndex, previousPageData) => {
@@ -40,9 +40,10 @@ function ConnectionNodes(props: ConNodesProps) {
                     }
                     {props.conNodes.map((value, index) => (
                         <VendorCard key={index}
-                                    photoUrl={value.gallery_photos[0].id}
+                                    photoUrl={value.gallery_photos[0]?.id || ''}
                                     vType={value.vendor_type}
                                     businessName={value.business_name}
+                                    businessSlug={value.business_name_slug}
                                     districtDisplayName={value.district_display_name}
                                     vid={value.id}
                         />
@@ -123,7 +124,7 @@ export function SearchResult(props: SearchResultProps) {
         return conNodes;
     };
 
-    if (!data) return <div>loading...</div>;
+    if (!data) return <LoadingPage/>;
 
     return (
         <>

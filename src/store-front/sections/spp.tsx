@@ -1,140 +1,190 @@
-import {PackageObject, PriceObject, PriceType, Spp, VendorDetailsBQuery, VendorType} from '../../http/generated';
-import {isMobile} from 'react-device-detect';
+import { PackageObject, PriceObject, PriceType, Spp, VendorDetailsBQuery, VendorType } from "../../http/generated";
+import styled from "styled-components";
 
 
-export default function SppView({data}: {data: VendorDetailsBQuery}) {
+export default function SppView({ data }: { data: VendorDetailsBQuery }) {
 
     return (
         <div>
             {
                 data.vendorDetailsB.vendor_type === VendorType.BeautyProfessional &&
-                SppPricing(data.vendorDetailsB.vendorTypes.beauty_professionals_type.pricing)
+                PackageContainer(data.vendorDetailsB.vendorTypes.beauty_professionals_type.pricing, data.vendorDetailsB.business_name)
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.Photographer&&
-                SppPricing(data.vendorDetailsB.vendorTypes.photographer_type.pricing)
+                data.vendorDetailsB.vendor_type === VendorType.Photographer &&
+                PackageContainer(data.vendorDetailsB.vendorTypes.photographer_type.pricing, data.vendorDetailsB.business_name)
             }
             {
                 data.vendorDetailsB.vendor_type === VendorType.Caterer &&
-                SppPricing(data.vendorDetailsB.vendorTypes.caterer_type.pricing)
+                PackageContainer(data.vendorDetailsB.vendorTypes.caterer_type.pricing, data.vendorDetailsB.business_name)
             }
             {
                 data.vendorDetailsB.vendor_type === VendorType.Videographer &&
-                SppPricing(data.vendorDetailsB.vendorTypes.videographer_type.pricing)
+                PackageContainer(data.vendorDetailsB.vendorTypes.videographer_type.pricing, data.vendorDetailsB.business_name)
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.BandsDj&&
-                SppPricing(data.vendorDetailsB.vendorTypes.band_djs_type.pricing)
+                data.vendorDetailsB.vendor_type === VendorType.BandsDj &&
+                PackageContainer(data.vendorDetailsB.vendorTypes.band_djs_type.pricing, data.vendorDetailsB.business_name)
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.Florist&&
-                SppPricing(data.vendorDetailsB.vendorTypes.florists_type.pricing)
+                data.vendorDetailsB.vendor_type === VendorType.Florist &&
+                PackageContainer(data.vendorDetailsB.vendorTypes.florists_type.pricing, data.vendorDetailsB.business_name)
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.CakesDessert&&
-                SppPricing(data.vendorDetailsB.vendorTypes.cakes_desserts_type.pricing)
+                data.vendorDetailsB.vendor_type === VendorType.CakesDessert &&
+                PackageContainer(data.vendorDetailsB.vendorTypes.cakes_desserts_type.pricing, data.vendorDetailsB.business_name)
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.Venue&&
-                SppPricing(data.vendorDetailsB.vendorTypes.venue_type.pricing)
+                data.vendorDetailsB.vendor_type === VendorType.Venue &&
+                PackageContainer(data.vendorDetailsB.vendorTypes.venue_type.pricing, data.vendorDetailsB.business_name, data.vendorDetailsB.vendor_type)
             }
         </div>
     );
 }
 
-const sppPriceView = (sppPrice: PriceObject) => {
+const priceRow = (sppPrice: PriceObject, packageObject: PackageObject) => {
+    const Container = styled.div`
+      font-weight: 400;
+      //color: #000a;
+      .pricing.lg {
+        font-size: 1.2rem;
+        color: #000c;
+        margin-top: 5px;
+        display: inline-block;
+      }
+    `;
+
+    const isName = () => sppPrice.name && sppPrice.name !== "-" && sppPrice.name.length > 2;
+    const Space = (<>&nbsp;&nbsp;</>);
+
+    const Fixed = () => {
+        if (packageObject.price.length === 1 && !isName()) {
+            return (
+                <span
+                    // className={"pricing lg"}>රු {sppPrice.fixed.price.toLocaleString()}/= {sppPrice.unit}</span>
+                    className={"pricing lg"}>Rs. {sppPrice.fixed.price.toLocaleString()}/= {sppPrice.unit}</span>
+            );
+        }
+        return (
+            <span
+                className={"pricing"}>{!isName() && "Pricing"} at {sppPrice.fixed.price.toLocaleString()}/= {sppPrice.unit}</span>
+        );
+    };
+    /*
+    * රු
+    * */
     return (
-        <div>
+        <Container>
             <p>
                 {
-                    sppPrice.name &&
-                    <span className={'font-weight-bold'}>{sppPrice.name}: {' '}</span>
+                    isName() &&
+                    <span className={"name"}>{sppPrice.name} {" "}</span>
                 }
                 {
                     sppPrice.price_type === PriceType.Starting &&
-                    <span className={'font-weight-bold'}>starting at Rs.{sppPrice.starting.price.toLocaleString()} Rs. {sppPrice.unit}</span>
+                    <span
+                        className={"pricing"}>{isName()} Pricing start at {sppPrice.starting.price.toLocaleString()}/= {sppPrice.unit}</span>
                 }
                 {
                     sppPrice.price_type === PriceType.Fixed &&
-                    <span className={'font-weight-bold'}>Rs.{sppPrice.fixed.price.toLocaleString()} {sppPrice.unit}</span>
+                    <Fixed />
                 }
                 {
                     sppPrice.price_type === PriceType.Range &&
-                    <span className={'font-weight-bold'}> Rs.{sppPrice.range.from_price.toLocaleString()}-Rs.{sppPrice.range.to_price.toLocaleString()} {sppPrice.unit}</span>
+                    <span
+                        className={"pricing"}> at {Space}රු {sppPrice.range.from_price.toLocaleString()} - {sppPrice.range.to_price.toLocaleString()}/= {sppPrice.unit}</span>
                 }
             </p>
-        </div>
+        </Container>
     );
 };
 
-function createHex(){
-    const hexValues = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
-    let hexColor = '#';
+const Package = (sppPackage: PackageObject) => {
+    const Container = styled.div`
+      //box-shadow: rgb(0 0 0 / 10%) 1px 2px 5px 0px;
+      max-width: 400px;
+      min-width: 350px;
+      min-height: 300px;
+      border: 1px solid #0002;
+      border-radius: 2px;
 
-    for(let i = 1; i<=6; i++){
-        let random = Math.floor(Math.random()*hexValues.length);
-        hexColor += hexValues[random];
-    }
-    return hexColor;
-}
+      & > .name {
+        font-family: Serif;
+        margin-bottom: 0;
+      }
 
-const SppPackage = (sppPackage: PackageObject) => {
+      & > .short {
+        color: #000b;
+        //color: #0008;
+        //font-weight: 500;
+      }
+
+      & > .prices {
+        margin-top: ${sppPackage.short ? "12px" : "8px"};
+      }
+
+      .dsc {
+        color: #000000aa;
+        font-weight: normal;
+        margin-bottom: 10px;
+      }
+
+      .dsc-title {
+        margin-top: 20px;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+    `;
+
     return (
-        <div className={'rounded p-2 mb-4 mr-4 p-4 pr-5'} style={{
-            // backgroundColor: '#fff',
-            backgroundColor: createHex()+'06',
-            // boxShadow: '1px 1px 4px 0px #00000033',
-            boxShadow: 'rgb(0 0 0 / 10%) 1px 2px 5px 0px',
-            maxWidth: '300px'
-        }}>
-            <h4 style={{
-                fontFamily: 'serif'
-            }}>{sppPackage.name}</h4>
+        <Container className={"p-2 mb-4 mr-4 p-4 pr-5"}>
+            <h4 className={"name"}>{sppPackage.name}</h4>
             {
                 sppPackage.short &&
-                <h6 style={{
-                    color: '#000000aa'
-                }}>{sppPackage.short}</h6>
-            }
-            {
-                sppPackage.description &&
-                <p style={{
-                    color: '#000000aa',
-                    marginTop: '20px',
-                    fontWeight: 'normal',
-                    marginBottom: '10px'
-                }} dangerouslySetInnerHTML={{__html: sppPackage.description.replaceAll('\n', '<br/>')}}/>
+                <div className={"short"}>{sppPackage.short}</div>
             }
             {
                 !!sppPackage.min_price &&
-                sppPackage.min_price > 200 &&
-                <p>Minimum Spend Rs.{sppPackage.min_price.toLocaleString()}</p>
+                !sppPackage?.price?.length &&
+                <div className={"min"}>Minimum Spend Rs.{sppPackage.min_price.toLocaleString()}</div>
             }
-            <div>
-                {sppPackage.price.map((value, index) => <div key={index}>{sppPriceView(value)}</div>)}
+            <div className={"prices"}>
+                {sppPackage.price.map((value, index) => <div key={index}>{priceRow(value, sppPackage)}</div>)}
             </div>
-        </div>
+            <div className={"dsc-title"}>Description</div>
+            {
+                sppPackage.description &&
+                <div className={"dsc"}
+                     dangerouslySetInnerHTML={{ __html: sppPackage.description.replaceAll("\n", "<br/>") }} />
+            }
+        </Container>
     );
 };
 
-const SppPricing = (pricing: Spp) => {
-    if (!pricing) {
+const PackageContainer = (pricing: Spp, name: string, vType?: VendorType) => {
+    const Title = styled.h1`
+      font-family: serif;
+      margin-bottom: 27px;
+      @media (max-width: 767px) {
+        text-align: center;
+      }
+    `;
+
+    if (!pricing?.packages?.length) {
         return null;
     }
     return (
-        <div className={'mt-5'}>
-            <div className={'container'}>
-                <div className="row" style={{marginBottom: isMobile? '20px':'70px'}}>
+        <div style={{ marginTop: 10 }}>
+            <div className={"container"}>
+                <div className="row">
                     <div className="col-sm-12">
-                        <h3 style={{
-                            fontFamily: 'sans-serif',
-                            color: '#000000dd',
-                            marginBottom: '34px'
-                        }}>Pricing Packages</h3>
-                        <div className={'d-flex flex-wrap'}>
+                        <Title>
+                            {name}{vType === VendorType.Venue && " Venue"} Packages
+                        </Title>
+                        <div className={"d-flex flex-wrap"}>
                             {
                                 pricing.packages.map(((value, index) => (
-                                    <div key={index}>{SppPackage(value)}</div>
+                                    <div key={index}>{Package(value)}</div>
                                 )))
                             }
                         </div>

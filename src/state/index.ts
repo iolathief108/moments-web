@@ -19,12 +19,26 @@ export const searchState = createGlobalState<wow>({
     vTypeSec: null,
 });
 
-type damn = {
+type pProp = {
     contactPopupActive: boolean
 }
-export const contactPopupState = createGlobalState<damn>({
+export const contactPopupState = createGlobalState<pProp>({
     contactPopupActive: false,
 });
+
+
+type gProp = {
+    galleryPopupActive: boolean
+    url: string
+    title: string
+}
+export const galleryPreviewPopupState = createGlobalState<gProp>({
+    galleryPopupActive: false,
+    url: '',
+    title:''
+});
+
+
 
 
 type Common = {

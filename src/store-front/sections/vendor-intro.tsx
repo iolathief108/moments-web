@@ -124,6 +124,11 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
         return data.vendorDetailsB?.vendor_type === VendorType.Venue;
     };
 
+    const Title = styled.h1`
+      font-family: serif;
+      margin-top: 15px;
+    `;
+
     return (
         <div style={{
             marginTop: '75px',
@@ -158,11 +163,7 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
                     }
                     <div className={`col-xs-12 col-sm-${!getPersonInfo() ? "6" : "8"}`}>
                         <div className="vendor-intro-section__container ml-secondary">
-                            <h2 style={{
-                                fontFamily: "serif",
-                                fontSize: "36px"
-                            }}
-                                className="marketplace__h2">About{isVenue() && " This Venue"} {!isVenue() && data.vendorDetailsB?.business_name}</h2>
+                            <Title className="marketplace__h2">About{isVenue() && " This Venue"} {!isVenue() && data.vendorDetailsB?.business_name}</Title>
                             <div style={{
                                 color: "rgb(0 0 0 / 70%)",
                                 paddingRight: "18px"

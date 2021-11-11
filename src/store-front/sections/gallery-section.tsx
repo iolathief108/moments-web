@@ -117,7 +117,7 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
     );
 
     return (
-        <div>
+        <div style={{marginTop: 50}}>
             <div className={'container text-center'}>
                 <div className={'row'} style={{
                     maxHeight: galleryFold ? isMobile ? '500px' : '700px' : '20000px',
@@ -145,14 +145,19 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                             zIndex: 18,
                             left: 0,
                             right: 0,
-                            bottom: '-23px',
-                            height: '100px',
+                            bottom: '0px',
+                            height: '110px',
                             pointerEvents: 'none',
                             backgroundImage: 'linear-gradient(hsla(0,0%,98.8%,0),#fff 90%)',
                         }}></div>
                     }
                 </div>
-                <button type={'button'} className={'v2-button secondary-button'} style={{ marginTop: '35px' }}
+                <button type={'button'} className={'v2-button secondary-button'} style={{
+                    marginTop: !galleryFold ? 28 : 3,
+                    position: 'relative',
+                    zIndex: 30,
+                    minWidth: 200
+                }}
                     onClick={() => {
                         if (!galleryFold) {
                             // window.scrollTo(0,0+100)

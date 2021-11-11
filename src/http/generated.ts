@@ -18,96 +18,119 @@ export type Scalars = {
 
 export type BandDjsDataType = {
   __typename?: 'BandDjsDataType';
-  pricing?: Maybe<Spp>;
+  hightlight?: Maybe<VideoUrl>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
+  videoSample?: Maybe<Array<VideoUrl>>;
 };
 
 export type BandDjsDetailsInput = {
-  pricing?: Maybe<SppInput>;
+  highlight?: Maybe<VideoUrlInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
+  videoSample?: Maybe<Array<VideoUrlInput>>;
 };
 
 export type BeautyProfessionalDataType = {
   __typename?: 'BeautyProfessionalDataType';
-  pricing?: Maybe<Spp>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
 };
 
 export type BeautyProfessionalDetailsInput = {
-  pricing?: Maybe<SppInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
 };
 
 export type CakesDessertsDataType = {
   __typename?: 'CakesDessertsDataType';
-  pricing?: Maybe<Spp>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
 };
 
 export type CakesDessertsDetailsInput = {
-  pricing?: Maybe<SppInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
 };
 
 export type CatererDataType = {
   __typename?: 'CatererDataType';
-  pricing?: Maybe<Spp>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
 };
 
 export type CatererDetailsInput = {
-  pricing?: Maybe<SppInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
 };
 
 export type City = {
   __typename?: 'City';
-  name: Scalars['String'];
   key: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Clap = {
   __typename?: 'Clap';
-  name: Scalars['String'];
   key: Scalars['String'];
+  name: Scalars['String'];
   values: Array<Scalars['String']>;
 };
 
 export type ClapInput = {
-  name: Scalars['String'];
   key: Scalars['String'];
+  name: Scalars['String'];
   values: Array<Scalars['String']>;
 };
 
 export type Connection = {
   __typename?: 'Connection';
-  pageInfo: PageInfo;
   edges: Array<NodeEdge>;
+  pageInfo: PageInfo;
 };
 
 export type ConnectionExtra = {
   __typename?: 'ConnectionExtra';
-  pageInfo: PageInfo;
-  edges: Array<NodeEdge>;
-  vendor_type?: Maybe<VendorType>;
-  district_key?: Maybe<Scalars['String']>;
   district_id?: Maybe<Scalars['String']>;
+  district_key?: Maybe<Scalars['String']>;
+  edges: Array<NodeEdge>;
+  pageInfo: PageInfo;
+  vendor_type?: Maybe<VendorType>;
 };
 
 export type ConnectionNode = {
   __typename?: 'ConnectionNode';
   business_name: Scalars['String'];
-  id: Scalars['String'];
-  gallery_photos: Array<Image>;
-  vendor_type: VendorType;
+  business_name_slug?: Maybe<Scalars['String']>;
   district_display_name?: Maybe<Scalars['String']>;
+  gallery_photos: Array<Image>;
+  id: Scalars['String'];
+  vendor_type: VendorType;
+};
+
+export type CustomThumbnailInput = {
+  id?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
 };
 
 export type District = {
   __typename?: 'District';
-  name: Scalars['String'];
-  key: Scalars['String'];
   cities: Array<City>;
+  key: Scalars['String'];
+  name: Scalars['String'];
+};
+
+export type Fixed = {
+  __typename?: 'Fixed';
+  price: Scalars['Float'];
 };
 
 export type FixedInput = {
@@ -121,30 +144,32 @@ export type FixedObject = {
 
 export type FloristsDataType = {
   __typename?: 'FloristsDataType';
-  pricing?: Maybe<Spp>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
 };
 
 export type FloristsDetailsInput = {
-  pricing?: Maybe<SppInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
 };
 
 export type FrequentQuestion = {
   __typename?: 'FrequentQuestion';
-  question: Scalars['String'];
   answer: Scalars['String'];
+  question: Scalars['String'];
 };
 
 /** Edit common vendor details */
 export type FrequentQuestionInput = {
-  question: Scalars['String'];
   answer: Scalars['String'];
+  question: Scalars['String'];
 };
 
 export type GalleryPhotoInput = {
-  token?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
 };
 
 export type Geo = {
@@ -161,71 +186,49 @@ export type GeoInput = {
 export type Image = {
   __typename?: 'Image';
   ht: Scalars['Float'];
-  wd: Scalars['Float'];
   id: Scalars['String'];
+  wd: Scalars['Float'];
 };
 
 /** Register new vendor data */
 export type ListInput = {
   districtID?: Maybe<Scalars['String']>;
-  vendorType?: Maybe<VendorType>;
   searchQuery?: Maybe<Scalars['String']>;
+  vendorType?: Maybe<VendorType>;
 };
 
 export enum ListingStatus {
-  Verified = 'verified',
-  Unverified = 'unverified',
-  Suspended = 'suspended',
+  PaymentPending = 'paymentPending',
   Pending = 'pending',
-  PaymentPending = 'paymentPending'
+  Suspended = 'suspended',
+  Unverified = 'unverified',
+  Verified = 'verified'
 }
 
 export type LocationNode = {
   __typename?: 'LocationNode';
   id: Scalars['String'];
-  name: Scalars['String'];
   key: Scalars['String'];
+  name: Scalars['String'];
   parent_id?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  vendorRegisterOtp: Scalars['Boolean'];
-  vendorRegister: Scalars['Boolean'];
-  vendorLoginOtp?: Maybe<Scalars['Boolean']>;
-  vendorLogin?: Maybe<Scalars['Boolean']>;
-  vendorLogout: Scalars['Boolean'];
+  changePassword?: Maybe<VendorProfile>;
   confirmEmailVendor?: Maybe<Scalars['Boolean']>;
   forgotPassword: Scalars['Boolean'];
-  changePassword?: Maybe<VendorProfile>;
   vendorEditDetails: Scalars['Boolean'];
+  vendorLogin?: Maybe<Scalars['Boolean']>;
+  vendorLoginOtp?: Maybe<Scalars['Boolean']>;
+  vendorLogout: Scalars['Boolean'];
+  vendorRegister: Scalars['Boolean'];
+  vendorRegisterOtp: Scalars['Boolean'];
 };
 
 
-export type MutationVendorRegisterOtpArgs = {
-  phone: Scalars['String'];
-};
-
-
-export type MutationVendorRegisterArgs = {
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  phone: Scalars['String'];
-  password: Scalars['String'];
-  authCode: Scalars['String'];
-};
-
-
-export type MutationVendorLoginOtpArgs = {
-  phone: Scalars['String'];
-};
-
-
-export type MutationVendorLoginArgs = {
-  password: Scalars['String'];
-  phone: Scalars['String'];
+export type MutationChangePasswordArgs = {
+  data: VendorPasswordChangeInput;
 };
 
 
@@ -239,57 +242,79 @@ export type MutationForgotPasswordArgs = {
 };
 
 
-export type MutationChangePasswordArgs = {
-  data: VendorPasswordChangeInput;
-};
-
-
 export type MutationVendorEditDetailsArgs = {
   data: VendorDetailsInput;
 };
 
+
+export type MutationVendorLoginArgs = {
+  password: Scalars['String'];
+  phone: Scalars['String'];
+};
+
+
+export type MutationVendorLoginOtpArgs = {
+  phone: Scalars['String'];
+};
+
+
+export type MutationVendorRegisterArgs = {
+  address?: Maybe<Scalars['String']>;
+  authCode: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  password: Scalars['String'];
+  phone: Scalars['String'];
+};
+
+
+export type MutationVendorRegisterOtpArgs = {
+  phone: Scalars['String'];
+};
+
 export type NodeEdge = {
   __typename?: 'NodeEdge';
-  node: ConnectionNode;
   /** Used in `before` and `after` args */
   cursor: Scalars['String'];
+  node: ConnectionNode;
 };
 
 export type PackageInput = {
-  name?: Maybe<Scalars['String']>;
-  short?: Maybe<Scalars['String']>;
-  min_price?: Maybe<Scalars['Float']>;
   description?: Maybe<Scalars['String']>;
+  min_price?: Maybe<Scalars['Float']>;
+  name?: Maybe<Scalars['String']>;
   price?: Maybe<Array<PriceInput>>;
+  short?: Maybe<Scalars['String']>;
 };
 
 export type PackageObject = {
   __typename?: 'PackageObject';
-  name?: Maybe<Scalars['String']>;
-  short?: Maybe<Scalars['String']>;
-  min_price?: Maybe<Scalars['Float']>;
   description?: Maybe<Scalars['String']>;
+  min_price?: Maybe<Scalars['Float']>;
+  name?: Maybe<Scalars['String']>;
   price?: Maybe<Array<PriceObject>>;
+  short?: Maybe<Scalars['String']>;
 };
 
 export type PageInfo = {
   __typename?: 'PageInfo';
+  endCursor?: Maybe<Scalars['String']>;
   hasNextPage: Scalars['Boolean'];
   hasPreviousPage: Scalars['Boolean'];
   startCursor?: Maybe<Scalars['String']>;
-  endCursor?: Maybe<Scalars['String']>;
 };
 
 export type PersonInfo = {
   __typename?: 'PersonInfo';
-  person_photo: Image;
   name: Scalars['String'];
+  person_photo: Image;
   position?: Maybe<Scalars['String']>;
 };
 
 export type PersonInfoInput = {
-  personPhoto?: Maybe<PersonPhotoInput>;
   name: Scalars['String'];
+  personPhoto?: Maybe<PersonPhotoInput>;
   position?: Maybe<Scalars['String']>;
 };
 
@@ -299,19 +324,21 @@ export type PersonPhotoInput = {
 
 export type PhotographerDataType = {
   __typename?: 'PhotographerDataType';
-  pricing?: Maybe<Spp>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
 };
 
 export type PhotographerDetailsInput = {
-  pricing?: Maybe<SppInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
 };
 
 export type PriceInput = {
+  fixed?: Maybe<FixedInput>;
   name?: Maybe<Scalars['String']>;
   price_type: PriceType;
-  fixed?: Maybe<FixedInput>;
   range?: Maybe<RangeInput>;
   starting?: Maybe<StartingInput>;
   unit?: Maybe<Scalars['String']>;
@@ -319,9 +346,9 @@ export type PriceInput = {
 
 export type PriceObject = {
   __typename?: 'PriceObject';
+  fixed?: Maybe<FixedObject>;
   name?: Maybe<Scalars['String']>;
   price_type: PriceType;
-  fixed?: Maybe<FixedObject>;
   range?: Maybe<RangeObject>;
   starting?: Maybe<StartingObject>;
   unit?: Maybe<Scalars['String']>;
@@ -335,40 +362,37 @@ export enum PriceType {
 
 export type Query = {
   __typename?: 'Query';
+  cities: Array<LocationNode>;
+  clapStore: Array<StoreClap>;
+  districts: Array<LocationNode>;
   isVendorPhoneExist: Scalars['Boolean'];
-  vendorProfile?: Maybe<VendorProfile>;
-  vendorSearch: Connection;
-  vendorSearchWithExtra: ConnectionExtra;
+  provinces: Array<LocationNode>;
   vendorDetails?: Maybe<VendorDetails>;
   vendorDetailsB?: Maybe<VendorDetails>;
   vendorDetailsExtra?: Maybe<VendorDetailsExtra>;
-  provinces: Array<LocationNode>;
-  districts: Array<LocationNode>;
-  cities: Array<LocationNode>;
-  clapStore: Array<StoreClap>;
+  vendorProfile?: Maybe<VendorProfile>;
+  vendorSearch: Connection;
+  vendorSearchWithExtra: ConnectionExtra;
+};
+
+
+export type QueryCitiesArgs = {
+  districts_id?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryClapStoreArgs = {
+  vendorType: VendorType;
+};
+
+
+export type QueryDistrictsArgs = {
+  province_id?: Maybe<Scalars['String']>;
 };
 
 
 export type QueryIsVendorPhoneExistArgs = {
   phone: Scalars['String'];
-};
-
-
-export type QueryVendorSearchArgs = {
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Float']>;
-  last?: Maybe<Scalars['Float']>;
-  where?: Maybe<ListInput>;
-};
-
-
-export type QueryVendorSearchWithExtraArgs = {
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Float']>;
-  last?: Maybe<Scalars['Float']>;
-  where?: Maybe<ListInput>;
 };
 
 
@@ -383,18 +407,27 @@ export type QueryVendorDetailsBArgs = {
 };
 
 
-export type QueryDistrictsArgs = {
-  province_id?: Maybe<Scalars['String']>;
+export type QueryVendorSearchArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Float']>;
+  last?: Maybe<Scalars['Float']>;
+  where?: Maybe<ListInput>;
 };
 
 
-export type QueryCitiesArgs = {
-  districts_id?: Maybe<Scalars['String']>;
+export type QueryVendorSearchWithExtraArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Float']>;
+  last?: Maybe<Scalars['Float']>;
+  where?: Maybe<ListInput>;
 };
 
-
-export type QueryClapStoreArgs = {
-  vendorType: VendorType;
+export type Range = {
+  __typename?: 'Range';
+  from_price: Scalars['Float'];
+  to_price: Scalars['Float'];
 };
 
 export type RangeInput = {
@@ -406,6 +439,55 @@ export type RangeObject = {
   __typename?: 'RangeObject';
   from_price?: Maybe<Scalars['Float']>;
   to_price?: Maybe<Scalars['Float']>;
+};
+
+export type ServicePrice = {
+  __typename?: 'ServicePrice';
+  class?: Maybe<Scalars['String']>;
+  fixed?: Maybe<Fixed>;
+  price_type: ServicePriceType;
+  product?: Maybe<Scalars['String']>;
+  range?: Maybe<Range>;
+  starting?: Maybe<Starting>;
+  unit?: Maybe<Scalars['String']>;
+};
+
+export type ServicePriceInput = {
+  class?: Maybe<Scalars['String']>;
+  fixed?: Maybe<FixedInput>;
+  price_type: ServicePriceType;
+  product?: Maybe<Scalars['String']>;
+  range?: Maybe<RangeInput>;
+  starting?: Maybe<StartingInput>;
+  unit?: Maybe<Scalars['String']>;
+};
+
+export enum ServicePriceType {
+  Fixed = 'Fixed',
+  Range = 'Range',
+  Starting = 'Starting'
+}
+
+export type ServicePricing = {
+  __typename?: 'ServicePricing';
+  min_spend?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+  service_prices: Array<ServicePrice>;
+};
+
+export type ServicePricingInput = {
+  min_spend?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+  service_prices?: Maybe<Array<ServicePriceInput>>;
+};
+
+export type ServicePricings = {
+  __typename?: 'ServicePricings';
+  pricings?: Maybe<Array<ServicePricing>>;
+};
+
+export type ServicePricingsInput = {
+  pricings?: Maybe<Array<ServicePricingInput>>;
 };
 
 export type SocialMedia = {
@@ -427,6 +509,11 @@ export type SppInput = {
   packages?: Maybe<Array<PackageInput>>;
 };
 
+export type Starting = {
+  __typename?: 'Starting';
+  price: Scalars['Float'];
+};
+
 export type StartingInput = {
   price?: Maybe<Scalars['Float']>;
 };
@@ -438,71 +525,71 @@ export type StartingObject = {
 
 export type StoreClap = {
   __typename?: 'StoreClap';
-  name: Scalars['String'];
   key: Scalars['String'];
+  name: Scalars['String'];
   values: Array<Scalars['String']>;
 };
 
 export type VendorDetails = {
   __typename?: 'VendorDetails';
-  phone?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
-  searchLocations?: Maybe<Array<District>>;
-  vendor_type?: Maybe<VendorType>;
-  links?: Maybe<SocialMedia>;
   business_name?: Maybe<Scalars['String']>;
+  claps?: Maybe<Array<Clap>>;
+  description?: Maybe<Scalars['String']>;
   frequent_questions?: Maybe<Array<FrequentQuestion>>;
-  vendorTypes?: Maybe<VendorTypes>;
   galleryPhoto?: Maybe<Array<Image>>;
   geo?: Maybe<Geo>;
-  description?: Maybe<Scalars['String']>;
-  claps?: Maybe<Array<Clap>>;
+  links?: Maybe<SocialMedia>;
+  phone?: Maybe<Scalars['String']>;
+  searchLocations?: Maybe<Array<District>>;
+  vendorTypes?: Maybe<VendorTypes>;
+  vendor_type?: Maybe<VendorType>;
 };
 
 export type VendorDetailsExtra = {
   __typename?: 'VendorDetailsExtra';
-  phone?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
-  searchLocations?: Maybe<Array<District>>;
-  vendor_type?: Maybe<VendorType>;
-  links?: Maybe<SocialMedia>;
   business_name?: Maybe<Scalars['String']>;
+  claps?: Maybe<Array<Clap>>;
+  description?: Maybe<Scalars['String']>;
   frequent_questions?: Maybe<Array<FrequentQuestion>>;
-  vendorTypes?: Maybe<VendorTypes>;
   galleryPhoto?: Maybe<Array<Image>>;
   geo?: Maybe<Geo>;
-  description?: Maybe<Scalars['String']>;
-  claps?: Maybe<Array<Clap>>;
   isComplete?: Maybe<Scalars['Boolean']>;
-  listingStatus?: Maybe<ListingStatus>;
   isLive?: Maybe<Scalars['Boolean']>;
+  links?: Maybe<SocialMedia>;
+  listingStatus?: Maybe<ListingStatus>;
+  phone?: Maybe<Scalars['String']>;
   reason?: Maybe<Scalars['String']>;
+  searchLocations?: Maybe<Array<District>>;
+  vendorTypes?: Maybe<VendorTypes>;
+  vendor_type?: Maybe<VendorType>;
 };
 
 /** Edit common vendor details */
 export type VendorDetailsInput = {
   address?: Maybe<Scalars['String']>;
-  cityIDs?: Maybe<Array<Scalars['String']>>;
-  phone?: Maybe<Scalars['String']>;
-  frequentQuestion?: Maybe<Array<FrequentQuestionInput>>;
-  vendorType?: Maybe<VendorType>;
-  businessName?: Maybe<Scalars['String']>;
-  facebook?: Maybe<Scalars['String']>;
-  instagram?: Maybe<Scalars['String']>;
-  pinterest?: Maybe<Scalars['String']>;
-  website?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  geo?: Maybe<GeoInput>;
-  gallery_photos?: Maybe<Array<GalleryPhotoInput>>;
-  venueDetails?: Maybe<VenueDetailsInput>;
-  photographerDetails?: Maybe<PhotographerDetailsInput>;
-  catererDetails?: Maybe<CatererDetailsInput>;
   bandDjsDetails?: Maybe<BandDjsDetailsInput>;
   beautyProfessionalDetails?: Maybe<BeautyProfessionalDetailsInput>;
+  businessName?: Maybe<Scalars['String']>;
   cakesDessertsDetails?: Maybe<CakesDessertsDetailsInput>;
-  floristsDetails?: Maybe<FloristsDetailsInput>;
-  videographerDetails?: Maybe<VideographerDetailsInput>;
+  catererDetails?: Maybe<CatererDetailsInput>;
+  cityIDs?: Maybe<Array<Scalars['String']>>;
   claps?: Maybe<Array<ClapInput>>;
+  description?: Maybe<Scalars['String']>;
+  facebook?: Maybe<Scalars['String']>;
+  floristsDetails?: Maybe<FloristsDetailsInput>;
+  frequentQuestion?: Maybe<Array<FrequentQuestionInput>>;
+  gallery_photos?: Maybe<Array<GalleryPhotoInput>>;
+  geo?: Maybe<GeoInput>;
+  instagram?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  photographerDetails?: Maybe<PhotographerDetailsInput>;
+  pinterest?: Maybe<Scalars['String']>;
+  vendorType?: Maybe<VendorType>;
+  venueDetails?: Maybe<VenueDetailsInput>;
+  videographerDetails?: Maybe<VideographerDetailsInput>;
+  website?: Maybe<Scalars['String']>;
 };
 
 /** vendor password change input */
@@ -513,88 +600,101 @@ export type VendorPasswordChangeInput = {
 
 export type VendorProfile = {
   __typename?: 'VendorProfile';
-  id: Scalars['ID'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
   email?: Maybe<Scalars['String']>;
+  firstName: Scalars['String'];
+  id: Scalars['ID'];
+  lastName: Scalars['String'];
   phone: Scalars['String'];
   verified: Scalars['Boolean'];
 };
 
 export enum VendorType {
-  Venue = 'venue',
-  Photographer = 'photographer',
-  Caterer = 'caterer',
-  Videographer = 'videographer',
-  Florist = 'florist',
   BandsDj = 'bands_dj',
   BeautyProfessional = 'beauty_professional',
-  CakesDessert = 'cakes_dessert'
+  CakesDessert = 'cakes_dessert',
+  Caterer = 'caterer',
+  Florist = 'florist',
+  Photographer = 'photographer',
+  Venue = 'venue',
+  Videographer = 'videographer'
 }
 
 export type VendorTypes = {
   __typename?: 'VendorTypes';
-  caterer_type?: Maybe<CatererDataType>;
-  venue_type?: Maybe<VenueDataType>;
-  photographer_type?: Maybe<PhotographerDataType>;
   band_djs_type?: Maybe<BandDjsDataType>;
   beauty_professionals_type?: Maybe<BeautyProfessionalDataType>;
   cakes_desserts_type?: Maybe<CakesDessertsDataType>;
+  caterer_type?: Maybe<CatererDataType>;
   florists_type?: Maybe<FloristsDataType>;
+  photographer_type?: Maybe<PhotographerDataType>;
+  venue_type?: Maybe<VenueDataType>;
   videographer_type?: Maybe<VideographerDataType>;
 };
 
 export type VenueDataType = {
   __typename?: 'VenueDataType';
+  guestCapacity?: Maybe<Scalars['Float']>;
+  hightlight?: Maybe<VideoUrl>;
   pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
 };
 
 export type VenueDetailsInput = {
+  guestCapacity?: Maybe<Scalars['Float']>;
+  highlight?: Maybe<VideoUrlInput>;
   pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
+};
+
+export type VideoUrl = {
+  __typename?: 'VideoUrl';
+  customThumbnail?: Maybe<Image>;
+  videoTitle?: Maybe<Scalars['String']>;
+  videoType?: Maybe<Scalars['String']>;
+  vimeoUrl?: Maybe<Scalars['String']>;
+  youtubeUrl?: Maybe<Scalars['String']>;
+};
+
+export type VideoUrlInput = {
+  customThumbnail?: Maybe<CustomThumbnailInput>;
+  videoTitle?: Maybe<Scalars['String']>;
+  videoType?: Maybe<Scalars['String']>;
+  vimeoUrl?: Maybe<Scalars['String']>;
+  youtubeUrl?: Maybe<Scalars['String']>;
 };
 
 export type VideographerDataType = {
   __typename?: 'VideographerDataType';
-  pricing?: Maybe<Spp>;
+  hightlight?: Maybe<VideoUrl>;
   personInfo?: Maybe<PersonInfo>;
+  pricing?: Maybe<Spp>;
+  servicePricing?: Maybe<ServicePricings>;
+  videoSample?: Maybe<Array<VideoUrl>>;
 };
 
 export type VideographerDetailsInput = {
-  pricing?: Maybe<SppInput>;
+  highlight?: Maybe<VideoUrlInput>;
   personInfo?: Maybe<PersonInfoInput>;
+  pricing?: Maybe<SppInput>;
+  servicePricing?: Maybe<ServicePricingsInput>;
+  videoSample?: Maybe<Array<VideoUrlInput>>;
 };
 
 export type TopWeddingVendorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopWeddingVendorsQuery = (
-  { __typename?: 'Query' }
-  & { vendorSearch: (
-    { __typename?: 'Connection' }
-    & { edges: Array<(
-      { __typename?: 'NodeEdge' }
-      & { node: (
-        { __typename?: 'ConnectionNode' }
-        & Pick<ConnectionNode, 'business_name' | 'id' | 'vendor_type' | 'district_display_name'>
-        & { gallery_photos: Array<(
-          { __typename?: 'Image' }
-          & Pick<Image, 'id' | 'ht' | 'wd'>
-        )> }
-      ) }
-    )> }
-  ) }
-);
+export type TopWeddingVendorsQuery = { __typename?: 'Query', vendorSearch: { __typename?: 'Connection', edges: Array<{ __typename?: 'NodeEdge', node: { __typename?: 'ConnectionNode', business_name: string, id: string, vendor_type: VendorType, district_display_name?: string | null | undefined, gallery_photos: Array<{ __typename?: 'Image', id: string, ht: number, wd: number }> } }> } };
 
 export type LocationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LocationsQuery = (
-  { __typename?: 'Query' }
-  & { districts: Array<(
-    { __typename?: 'LocationNode' }
-    & Pick<LocationNode, 'id' | 'name' | 'key'>
-  )> }
-);
+export type LocationsQuery = { __typename?: 'Query', districts: Array<{ __typename?: 'LocationNode', id: string, name: string, key: string }> };
+
+export type PricingFragment = { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined };
+
+export type PersonInfoItemsFragment = { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } };
+
+export type ServicePricingsItemsFragment = { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined };
 
 export type VendorDetailsBQueryVariables = Exact<{
   businessName: Scalars['String'];
@@ -602,277 +702,7 @@ export type VendorDetailsBQueryVariables = Exact<{
 }>;
 
 
-export type VendorDetailsBQuery = (
-  { __typename?: 'Query' }
-  & { vendorDetailsB?: Maybe<(
-    { __typename?: 'VendorDetails' }
-    & Pick<VendorDetails, 'phone' | 'business_name' | 'vendor_type' | 'description' | 'address'>
-    & { galleryPhoto?: Maybe<Array<(
-      { __typename?: 'Image' }
-      & Pick<Image, 'id' | 'ht' | 'wd'>
-    )>>, frequent_questions?: Maybe<Array<(
-      { __typename?: 'FrequentQuestion' }
-      & Pick<FrequentQuestion, 'answer' | 'question'>
-    )>>, vendorTypes?: Maybe<(
-      { __typename?: 'VendorTypes' }
-      & { caterer_type?: Maybe<(
-        { __typename?: 'CatererDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )>, beauty_professionals_type?: Maybe<(
-        { __typename?: 'BeautyProfessionalDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )>, venue_type?: Maybe<(
-        { __typename?: 'VenueDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )> }
-      )>, photographer_type?: Maybe<(
-        { __typename?: 'PhotographerDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )>, videographer_type?: Maybe<(
-        { __typename?: 'VideographerDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )>, band_djs_type?: Maybe<(
-        { __typename?: 'BandDjsDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )>, florists_type?: Maybe<(
-        { __typename?: 'FloristsDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )>, cakes_desserts_type?: Maybe<(
-        { __typename?: 'CakesDessertsDataType' }
-        & { pricing?: Maybe<(
-          { __typename?: 'Spp' }
-          & Pick<Spp, 'min_price'>
-          & { packages?: Maybe<Array<(
-            { __typename?: 'PackageObject' }
-            & Pick<PackageObject, 'name' | 'short' | 'min_price' | 'description'>
-            & { price?: Maybe<Array<(
-              { __typename?: 'PriceObject' }
-              & Pick<PriceObject, 'name' | 'price_type' | 'unit'>
-              & { fixed?: Maybe<(
-                { __typename?: 'FixedObject' }
-                & Pick<FixedObject, 'price'>
-              )>, range?: Maybe<(
-                { __typename?: 'RangeObject' }
-                & Pick<RangeObject, 'from_price' | 'to_price'>
-              )>, starting?: Maybe<(
-                { __typename?: 'StartingObject' }
-                & Pick<StartingObject, 'price'>
-              )> }
-            )>> }
-          )>> }
-        )>, personInfo?: Maybe<(
-          { __typename?: 'PersonInfo' }
-          & Pick<PersonInfo, 'name' | 'position'>
-          & { person_photo: (
-            { __typename?: 'Image' }
-            & Pick<Image, 'ht' | 'id' | 'wd'>
-          ) }
-        )> }
-      )> }
-    )>, searchLocations?: Maybe<Array<(
-      { __typename?: 'District' }
-      & Pick<District, 'name'>
-      & { cities: Array<(
-        { __typename?: 'City' }
-        & Pick<City, 'name'>
-      )> }
-    )>>, links?: Maybe<(
-      { __typename?: 'SocialMedia' }
-      & Pick<SocialMedia, 'facebook' | 'instagram' | 'pinterest' | 'website'>
-    )>, claps?: Maybe<Array<(
-      { __typename?: 'Clap' }
-      & Pick<Clap, 'name' | 'key' | 'values'>
-    )>> }
-  )> }
-);
+export type VendorDetailsBQuery = { __typename?: 'Query', vendorDetailsB?: { __typename?: 'VendorDetails', phone?: string | null | undefined, business_name?: string | null | undefined, vendor_type?: VendorType | null | undefined, description?: string | null | undefined, address?: string | null | undefined, galleryPhoto?: Array<{ __typename?: 'Image', id: string, ht: number, wd: number }> | null | undefined, frequent_questions?: Array<{ __typename?: 'FrequentQuestion', answer: string, question: string }> | null | undefined, vendorTypes?: { __typename?: 'VendorTypes', caterer_type?: { __typename?: 'CatererDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined } | null | undefined, beauty_professionals_type?: { __typename?: 'BeautyProfessionalDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined } | null | undefined, venue_type?: { __typename?: 'VenueDataType', guestCapacity?: number | null | undefined, pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, hightlight?: { __typename?: 'VideoUrl', vimeoUrl?: string | null | undefined, youtubeUrl?: string | null | undefined } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined } | null | undefined, photographer_type?: { __typename?: 'PhotographerDataType', servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined, pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, videographer_type?: { __typename?: 'VideographerDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined, hightlight?: { __typename?: 'VideoUrl', vimeoUrl?: string | null | undefined, youtubeUrl?: string | null | undefined } | null | undefined, videoSample?: Array<{ __typename?: 'VideoUrl', vimeoUrl?: string | null | undefined, youtubeUrl?: string | null | undefined, videoTitle?: string | null | undefined, videoType?: string | null | undefined, customThumbnail?: { __typename?: 'Image', id: string, ht: number, wd: number } | null | undefined }> | null | undefined } | null | undefined, band_djs_type?: { __typename?: 'BandDjsDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined, hightlight?: { __typename?: 'VideoUrl', vimeoUrl?: string | null | undefined, youtubeUrl?: string | null | undefined } | null | undefined, videoSample?: Array<{ __typename?: 'VideoUrl', vimeoUrl?: string | null | undefined, youtubeUrl?: string | null | undefined }> | null | undefined } | null | undefined, florists_type?: { __typename?: 'FloristsDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, cakes_desserts_type?: { __typename?: 'CakesDessertsDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, servicePricing?: { __typename?: 'ServicePricings', pricings?: Array<{ __typename?: 'ServicePricing', name: string, min_spend?: number | null | undefined, service_prices: Array<{ __typename?: 'ServicePrice', price_type: ServicePriceType, product?: string | null | undefined, class?: string | null | undefined, unit?: string | null | undefined, fixed?: { __typename?: 'Fixed', price: number } | null | undefined, range?: { __typename?: 'Range', to_price: number, from_price: number } | null | undefined, starting?: { __typename?: 'Starting', price: number } | null | undefined }> }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined } | null | undefined, searchLocations?: Array<{ __typename?: 'District', name: string, cities: Array<{ __typename?: 'City', name: string }> }> | null | undefined, links?: { __typename?: 'SocialMedia', facebook?: string | null | undefined, instagram?: string | null | undefined, pinterest?: string | null | undefined, website?: string | null | undefined } | null | undefined, claps?: Array<{ __typename?: 'Clap', name: string, key: string, values: Array<string> }> | null | undefined } | null | undefined };
 
 export type VendorSearchQueryVariables = Exact<{
   after?: Maybe<Scalars['String']>;
@@ -882,30 +712,181 @@ export type VendorSearchQueryVariables = Exact<{
 }>;
 
 
-export type VendorSearchQuery = (
-  { __typename?: 'Query' }
-  & { vendorSearchWithExtra: (
-    { __typename?: 'ConnectionExtra' }
-    & Pick<ConnectionExtra, 'district_key' | 'vendor_type' | 'district_id'>
-    & { edges: Array<(
-      { __typename?: 'NodeEdge' }
-      & Pick<NodeEdge, 'cursor'>
-      & { node: (
-        { __typename?: 'ConnectionNode' }
-        & Pick<ConnectionNode, 'business_name' | 'id' | 'vendor_type' | 'district_display_name'>
-        & { gallery_photos: Array<(
-          { __typename?: 'Image' }
-          & Pick<Image, 'id' | 'ht' | 'wd'>
-        )> }
-      ) }
-    )>, pageInfo: (
-      { __typename?: 'PageInfo' }
-      & Pick<PageInfo, 'hasNextPage' | 'hasPreviousPage' | 'endCursor'>
-    ) }
-  ) }
-);
+export type VendorSearchQuery = { __typename?: 'Query', vendorSearchWithExtra: { __typename?: 'ConnectionExtra', district_key?: string | null | undefined, vendor_type?: VendorType | null | undefined, district_id?: string | null | undefined, edges: Array<{ __typename?: 'NodeEdge', cursor: string, node: { __typename?: 'ConnectionNode', business_name: string, business_name_slug?: string | null | undefined, id: string, vendor_type: VendorType, district_display_name?: string | null | undefined, gallery_photos: Array<{ __typename?: 'Image', id: string, ht: number, wd: number }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null | undefined } } };
+
+export type VendorLoginOtpMutationVariables = Exact<{
+  phone: Scalars['String'];
+}>;
 
 
+export type VendorLoginOtpMutation = { __typename?: 'Mutation', vendorLoginOtp?: boolean | null | undefined };
+
+export type VendorLoginMutationVariables = Exact<{
+  phone: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type VendorLoginMutation = { __typename?: 'Mutation', vendorLogin?: boolean | null | undefined };
+
+export type GetVendorProfileIdQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVendorProfileIdQuery = { __typename?: 'Query', vendorProfile?: { __typename?: 'VendorProfile', id: string } | null | undefined };
+
+export type GetVendorProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVendorProfileQuery = { __typename?: 'Query', vendorProfile?: { __typename?: 'VendorProfile', id: string, firstName: string, lastName: string, email?: string | null | undefined, phone: string, verified: boolean } | null | undefined };
+
+export type VendorLogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type VendorLogoutMutation = { __typename?: 'Mutation', vendorLogout: boolean };
+
+export type IsVendorPhoneExistQueryVariables = Exact<{
+  phone: Scalars['String'];
+}>;
+
+
+export type IsVendorPhoneExistQuery = { __typename?: 'Query', isVendorPhoneExist: boolean };
+
+export type VendorRegisterOtpMutationVariables = Exact<{
+  phone: Scalars['String'];
+}>;
+
+
+export type VendorRegisterOtpMutation = { __typename?: 'Mutation', vendorRegisterOtp: boolean };
+
+export type VendorRegisterMutationVariables = Exact<{
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  phone: Scalars['String'];
+  password: Scalars['String'];
+  authCode: Scalars['String'];
+}>;
+
+
+export type VendorRegisterMutation = { __typename?: 'Mutation', vendorRegister: boolean };
+
+export type EditVendorDetailsMutationVariables = Exact<{
+  businessName?: Maybe<Scalars['String']>;
+  vendorType?: Maybe<VendorType>;
+  address?: Maybe<Scalars['String']>;
+  galleryPhotos?: Maybe<Array<GalleryPhotoInput> | GalleryPhotoInput>;
+  frequentQuestion?: Maybe<Array<FrequentQuestionInput> | FrequentQuestionInput>;
+  geo?: Maybe<GeoInput>;
+  phone?: Maybe<Scalars['String']>;
+  cityIds?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  facebook?: Maybe<Scalars['String']>;
+  pinterest?: Maybe<Scalars['String']>;
+  instagram?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
+  claps?: Maybe<Array<ClapInput> | ClapInput>;
+  description?: Maybe<Scalars['String']>;
+  catererDetails?: Maybe<CatererDetailsInput>;
+  photographerDetails?: Maybe<PhotographerDetailsInput>;
+  venueDetails?: Maybe<VenueDetailsInput>;
+  videographerDetails?: Maybe<VideographerDetailsInput>;
+  bandDjsDetails?: Maybe<BandDjsDetailsInput>;
+  beautyProfessionalsDetails?: Maybe<BeautyProfessionalDetailsInput>;
+  cakesDessertsDetails?: Maybe<CakesDessertsDetailsInput>;
+  floristsDetails?: Maybe<FloristsDetailsInput>;
+}>;
+
+
+export type EditVendorDetailsMutation = { __typename?: 'Mutation', vendorEditDetails: boolean };
+
+export type GetVendorDetailsExtraQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVendorDetailsExtraQuery = { __typename?: 'Query', vendorDetailsExtra?: { __typename?: 'VendorDetailsExtra', phone?: string | null | undefined, description?: string | null | undefined, address?: string | null | undefined, listingStatus?: ListingStatus | null | undefined, reason?: string | null | undefined, isLive?: boolean | null | undefined, vendor_type?: VendorType | null | undefined, business_name?: string | null | undefined, isComplete?: boolean | null | undefined, vendorTypes?: { __typename?: 'VendorTypes', caterer_type?: { __typename?: 'CatererDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, beauty_professionals_type?: { __typename?: 'BeautyProfessionalDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, venue_type?: { __typename?: 'VenueDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined } | null | undefined, photographer_type?: { __typename?: 'PhotographerDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, videographer_type?: { __typename?: 'VideographerDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, band_djs_type?: { __typename?: 'BandDjsDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, florists_type?: { __typename?: 'FloristsDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined, cakes_desserts_type?: { __typename?: 'CakesDessertsDataType', pricing?: { __typename?: 'Spp', min_price?: number | null | undefined, packages?: Array<{ __typename?: 'PackageObject', name?: string | null | undefined, short?: string | null | undefined, min_price?: number | null | undefined, description?: string | null | undefined, price?: Array<{ __typename?: 'PriceObject', name?: string | null | undefined, price_type: PriceType, unit?: string | null | undefined, fixed?: { __typename?: 'FixedObject', price?: number | null | undefined } | null | undefined, range?: { __typename?: 'RangeObject', from_price?: number | null | undefined, to_price?: number | null | undefined } | null | undefined, starting?: { __typename?: 'StartingObject', price?: number | null | undefined } | null | undefined }> | null | undefined }> | null | undefined } | null | undefined, personInfo?: { __typename?: 'PersonInfo', name: string, position?: string | null | undefined, person_photo: { __typename?: 'Image', ht: number, wd: number, id: string } } | null | undefined } | null | undefined } | null | undefined, searchLocations?: Array<{ __typename?: 'District', name: string, key: string, cities: Array<{ __typename?: 'City', name: string, key: string }> }> | null | undefined, geo?: { __typename?: 'Geo', latitude: number, longitude: number } | null | undefined, frequent_questions?: Array<{ __typename?: 'FrequentQuestion', question: string, answer: string }> | null | undefined, links?: { __typename?: 'SocialMedia', facebook?: string | null | undefined, instagram?: string | null | undefined, pinterest?: string | null | undefined, website?: string | null | undefined } | null | undefined, galleryPhoto?: Array<{ __typename?: 'Image', ht: number, wd: number, id: string }> | null | undefined, claps?: Array<{ __typename?: 'Clap', name: string, key: string, values: Array<string> }> | null | undefined } | null | undefined };
+
+export type GetInitialDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetInitialDataQuery = { __typename?: 'Query', vendorDetailsExtra?: { __typename?: 'VendorDetailsExtra', business_name?: string | null | undefined, vendor_type?: VendorType | null | undefined } | null | undefined };
+
+export type GetDistrictsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetDistrictsQuery = { __typename?: 'Query', districts: Array<{ __typename?: 'LocationNode', id: string, name: string, key: string, parent_id?: string | null | undefined }> };
+
+export type GetCitiesQueryVariables = Exact<{
+  districtId: Scalars['String'];
+}>;
+
+
+export type GetCitiesQuery = { __typename?: 'Query', cities: Array<{ __typename?: 'LocationNode', id: string, name: string, key: string, parent_id?: string | null | undefined }> };
+
+export type GetClapStoreQueryVariables = Exact<{
+  vendorType: VendorType;
+}>;
+
+
+export type GetClapStoreQuery = { __typename?: 'Query', clapStore: Array<{ __typename?: 'StoreClap', name: string, key: string, values: Array<string> }> };
+
+export const PricingFragmentDoc = gql`
+    fragment Pricing on Spp {
+  min_price
+  packages {
+    name
+    short
+    min_price
+    description
+    price {
+      name
+      price_type
+      fixed {
+        price
+      }
+      range {
+        from_price
+        to_price
+      }
+      starting {
+        price
+      }
+      unit
+    }
+  }
+}
+    `;
+export const PersonInfoItemsFragmentDoc = gql`
+    fragment PersonInfoItems on PersonInfo {
+  name
+  position
+  person_photo {
+    ht
+    wd
+    id
+  }
+}
+    `;
+export const ServicePricingsItemsFragmentDoc = gql`
+    fragment ServicePricingsItems on ServicePricings {
+  pricings {
+    name
+    service_prices {
+      price_type
+      product
+      fixed {
+        price
+      }
+      range {
+        to_price
+        from_price
+      }
+      starting {
+        price
+      }
+      class
+      unit
+    }
+    min_spend
+  }
+}
+    `;
 export const TopWeddingVendorsDocument = gql`
     query TopWeddingVendors {
   vendorSearch(first: 10) {
@@ -952,6 +933,249 @@ export const VendorDetailsBDocument = gql`
     vendorTypes {
       caterer_type {
         pricing {
+          ...Pricing
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+      }
+      beauty_professionals_type {
+        pricing {
+          ...Pricing
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+      }
+      venue_type {
+        pricing {
+          ...Pricing
+        }
+        hightlight {
+          vimeoUrl
+          youtubeUrl
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+        guestCapacity
+      }
+      photographer_type {
+        servicePricing {
+          ...ServicePricingsItems
+        }
+        pricing {
+          ...Pricing
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+      }
+      videographer_type {
+        pricing {
+          ...Pricing
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+        hightlight {
+          vimeoUrl
+          youtubeUrl
+        }
+        videoSample {
+          vimeoUrl
+          youtubeUrl
+          videoTitle
+          videoType
+          customThumbnail {
+            id
+            ht
+            wd
+          }
+        }
+      }
+      band_djs_type {
+        pricing {
+          ...Pricing
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+        hightlight {
+          vimeoUrl
+          youtubeUrl
+        }
+        videoSample {
+          vimeoUrl
+          youtubeUrl
+        }
+      }
+      florists_type {
+        pricing {
+          ...Pricing
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+      }
+      cakes_desserts_type {
+        pricing {
+          ...Pricing
+        }
+        servicePricing {
+          ...ServicePricingsItems
+        }
+        personInfo {
+          ...PersonInfoItems
+        }
+      }
+    }
+    searchLocations {
+      cities {
+        name
+      }
+      name
+    }
+    links {
+      facebook
+      instagram
+      pinterest
+      website
+    }
+    description
+    address
+    claps {
+      name
+      key
+      values
+    }
+  }
+}
+    ${PricingFragmentDoc}
+${PersonInfoItemsFragmentDoc}
+${ServicePricingsItemsFragmentDoc}`;
+export const VendorSearchDocument = gql`
+    query VendorSearch($after: String, $searchQuery: String, $districtID: String, $vendorType: VendorType) {
+  vendorSearchWithExtra(
+    first: 12
+    after: $after
+    where: {districtID: $districtID, searchQuery: $searchQuery, vendorType: $vendorType}
+  ) {
+    district_key
+    vendor_type
+    district_id
+    edges {
+      cursor
+      node {
+        business_name
+        business_name_slug
+        id
+        gallery_photos {
+          id
+          ht
+          wd
+        }
+        vendor_type
+        district_display_name
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+    }
+  }
+}
+    `;
+export const VendorLoginOtpDocument = gql`
+    mutation vendorLoginOtp($phone: String!) {
+  vendorLoginOtp(phone: $phone)
+}
+    `;
+export const VendorLoginDocument = gql`
+    mutation vendorLogin($phone: String!, $password: String!) {
+  vendorLogin(phone: $phone, password: $password)
+}
+    `;
+export const GetVendorProfileIdDocument = gql`
+    query getVendorProfileId {
+  vendorProfile {
+    id
+  }
+}
+    `;
+export const GetVendorProfileDocument = gql`
+    query getVendorProfile {
+  vendorProfile {
+    id
+    firstName
+    lastName
+    email
+    phone
+    verified
+  }
+}
+    `;
+export const VendorLogoutDocument = gql`
+    mutation vendorLogout {
+  vendorLogout
+}
+    `;
+export const IsVendorPhoneExistDocument = gql`
+    query isVendorPhoneExist($phone: String!) {
+  isVendorPhoneExist(phone: $phone)
+}
+    `;
+export const VendorRegisterOtpDocument = gql`
+    mutation vendorRegisterOtp($phone: String!) {
+  vendorRegisterOtp(phone: $phone)
+}
+    `;
+export const VendorRegisterDocument = gql`
+    mutation vendorRegister($firstName: String!, $lastName: String!, $phone: String!, $password: String!, $authCode: String!) {
+  vendorRegister(
+    firstName: $firstName
+    lastName: $lastName
+    phone: $phone
+    password: $password
+    authCode: $authCode
+  )
+}
+    `;
+export const EditVendorDetailsDocument = gql`
+    mutation editVendorDetails($businessName: String, $vendorType: VendorType, $address: String, $galleryPhotos: [GalleryPhotoInput!], $frequentQuestion: [FrequentQuestionInput!], $geo: GeoInput, $phone: String, $cityIds: [String!], $facebook: String, $pinterest: String, $instagram: String, $website: String, $claps: [ClapInput!], $description: String, $catererDetails: CatererDetailsInput, $photographerDetails: PhotographerDetailsInput, $venueDetails: VenueDetailsInput, $videographerDetails: VideographerDetailsInput, $bandDjsDetails: BandDjsDetailsInput, $beautyProfessionalsDetails: BeautyProfessionalDetailsInput, $cakesDessertsDetails: CakesDessertsDetailsInput, $floristsDetails: FloristsDetailsInput) {
+  vendorEditDetails(
+    data: {catererDetails: $catererDetails, photographerDetails: $photographerDetails, venueDetails: $venueDetails, videographerDetails: $videographerDetails, bandDjsDetails: $bandDjsDetails, beautyProfessionalDetails: $beautyProfessionalsDetails, cakesDessertsDetails: $cakesDessertsDetails, floristsDetails: $floristsDetails, businessName: $businessName, vendorType: $vendorType, address: $address, facebook: $facebook, gallery_photos: $galleryPhotos, frequentQuestion: $frequentQuestion, geo: $geo, instagram: $instagram, phone: $phone, pinterest: $pinterest, cityIDs: $cityIds, website: $website, claps: $claps, description: $description}
+  )
+}
+    `;
+export const GetVendorDetailsExtraDocument = gql`
+    query getVendorDetailsExtra {
+  vendorDetailsExtra {
+    phone
+    description
+    address
+    listingStatus
+    reason
+    isLive
+    vendorTypes {
+      caterer_type {
+        pricing {
           min_price
           packages {
             name
@@ -980,8 +1204,8 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
@@ -1015,8 +1239,8 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
@@ -1076,8 +1300,8 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
@@ -1111,8 +1335,8 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
@@ -1146,8 +1370,8 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
@@ -1181,8 +1405,8 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
@@ -1216,63 +1440,84 @@ export const VendorDetailsBDocument = gql`
           position
           person_photo {
             ht
-            id
             wd
+            id
           }
         }
       }
     }
     searchLocations {
+      name
+      key
       cities {
         name
+        key
       }
-      name
     }
+    geo {
+      latitude
+      longitude
+    }
+    frequent_questions {
+      question
+      answer
+    }
+    vendor_type
     links {
       facebook
       instagram
       pinterest
       website
     }
-    description
-    address
+    business_name
+    galleryPhoto {
+      ht
+      wd
+      id
+    }
     claps {
       name
       key
       values
     }
+    isComplete
   }
 }
     `;
-export const VendorSearchDocument = gql`
-    query VendorSearch($after: String, $searchQuery: String, $districtID: String, $vendorType: VendorType) {
-  vendorSearchWithExtra(
-    first: 12
-    after: $after
-    where: {districtID: $districtID, searchQuery: $searchQuery, vendorType: $vendorType}
-  ) {
-    district_key
+export const GetInitialDataDocument = gql`
+    query getInitialData {
+  vendorDetailsExtra {
+    business_name
     vendor_type
-    district_id
-    edges {
-      cursor
-      node {
-        business_name
-        id
-        gallery_photos {
-          id
-          ht
-          wd
-        }
-        vendor_type
-        district_display_name
-      }
-    }
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      endCursor
-    }
+  }
+}
+    `;
+export const GetDistrictsDocument = gql`
+    query getDistricts {
+  districts {
+    id
+    name
+    key
+    parent_id
+  }
+}
+    `;
+export const GetCitiesDocument = gql`
+    query getCities($districtId: String!) {
+  cities(districts_id: $districtId) {
+    id
+    name
+    key
+    parent_id
+  }
+}
+    `;
+export const GetClapStoreDocument = gql`
+    query getClapStore($vendorType: VendorType!) {
+  clapStore(vendorType: $vendorType) {
+    name
+    key
+    values
   }
 }
     `;
@@ -1295,6 +1540,48 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     VendorSearch(variables?: VendorSearchQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VendorSearchQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<VendorSearchQuery>(VendorSearchDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'VendorSearch');
+    },
+    vendorLoginOtp(variables: VendorLoginOtpMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VendorLoginOtpMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VendorLoginOtpMutation>(VendorLoginOtpDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'vendorLoginOtp');
+    },
+    vendorLogin(variables: VendorLoginMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VendorLoginMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VendorLoginMutation>(VendorLoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'vendorLogin');
+    },
+    getVendorProfileId(variables?: GetVendorProfileIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetVendorProfileIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetVendorProfileIdQuery>(GetVendorProfileIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getVendorProfileId');
+    },
+    getVendorProfile(variables?: GetVendorProfileQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetVendorProfileQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetVendorProfileQuery>(GetVendorProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getVendorProfile');
+    },
+    vendorLogout(variables?: VendorLogoutMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VendorLogoutMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VendorLogoutMutation>(VendorLogoutDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'vendorLogout');
+    },
+    isVendorPhoneExist(variables: IsVendorPhoneExistQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IsVendorPhoneExistQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IsVendorPhoneExistQuery>(IsVendorPhoneExistDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'isVendorPhoneExist');
+    },
+    vendorRegisterOtp(variables: VendorRegisterOtpMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VendorRegisterOtpMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VendorRegisterOtpMutation>(VendorRegisterOtpDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'vendorRegisterOtp');
+    },
+    vendorRegister(variables: VendorRegisterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<VendorRegisterMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<VendorRegisterMutation>(VendorRegisterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'vendorRegister');
+    },
+    editVendorDetails(variables?: EditVendorDetailsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<EditVendorDetailsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EditVendorDetailsMutation>(EditVendorDetailsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'editVendorDetails');
+    },
+    getVendorDetailsExtra(variables?: GetVendorDetailsExtraQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetVendorDetailsExtraQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetVendorDetailsExtraQuery>(GetVendorDetailsExtraDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getVendorDetailsExtra');
+    },
+    getInitialData(variables?: GetInitialDataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetInitialDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetInitialDataQuery>(GetInitialDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getInitialData');
+    },
+    getDistricts(variables?: GetDistrictsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDistrictsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDistrictsQuery>(GetDistrictsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDistricts');
+    },
+    getCities(variables: GetCitiesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetCitiesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCitiesQuery>(GetCitiesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCities');
+    },
+    getClapStore(variables: GetClapStoreQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetClapStoreQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetClapStoreQuery>(GetClapStoreDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getClapStore');
     }
   };
 }
@@ -1338,6 +1625,30 @@ export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionW
         utilsForInfinite.generateGetKey<VendorSearchQuery, VendorSearchQueryVariables>(genKey<VendorSearchQueryVariables>('VendorSearch', variables), getKey),
         utilsForInfinite.generateFetcher<VendorSearchQuery, VendorSearchQueryVariables>(sdk.VendorSearch, variables),
         config);
+    },
+    useGetVendorProfileId(variables?: GetVendorProfileIdQueryVariables, config?: SWRConfigInterface<GetVendorProfileIdQuery, ClientError>) {
+      return useSWR<GetVendorProfileIdQuery, ClientError>(genKey<GetVendorProfileIdQueryVariables>('GetVendorProfileId', variables), () => sdk.getVendorProfileId(variables), config);
+    },
+    useGetVendorProfile(variables?: GetVendorProfileQueryVariables, config?: SWRConfigInterface<GetVendorProfileQuery, ClientError>) {
+      return useSWR<GetVendorProfileQuery, ClientError>(genKey<GetVendorProfileQueryVariables>('GetVendorProfile', variables), () => sdk.getVendorProfile(variables), config);
+    },
+    useIsVendorPhoneExist(variables: IsVendorPhoneExistQueryVariables, config?: SWRConfigInterface<IsVendorPhoneExistQuery, ClientError>) {
+      return useSWR<IsVendorPhoneExistQuery, ClientError>(genKey<IsVendorPhoneExistQueryVariables>('IsVendorPhoneExist', variables), () => sdk.isVendorPhoneExist(variables), config);
+    },
+    useGetVendorDetailsExtra(variables?: GetVendorDetailsExtraQueryVariables, config?: SWRConfigInterface<GetVendorDetailsExtraQuery, ClientError>) {
+      return useSWR<GetVendorDetailsExtraQuery, ClientError>(genKey<GetVendorDetailsExtraQueryVariables>('GetVendorDetailsExtra', variables), () => sdk.getVendorDetailsExtra(variables), config);
+    },
+    useGetInitialData(variables?: GetInitialDataQueryVariables, config?: SWRConfigInterface<GetInitialDataQuery, ClientError>) {
+      return useSWR<GetInitialDataQuery, ClientError>(genKey<GetInitialDataQueryVariables>('GetInitialData', variables), () => sdk.getInitialData(variables), config);
+    },
+    useGetDistricts(variables?: GetDistrictsQueryVariables, config?: SWRConfigInterface<GetDistrictsQuery, ClientError>) {
+      return useSWR<GetDistrictsQuery, ClientError>(genKey<GetDistrictsQueryVariables>('GetDistricts', variables), () => sdk.getDistricts(variables), config);
+    },
+    useGetCities(variables: GetCitiesQueryVariables, config?: SWRConfigInterface<GetCitiesQuery, ClientError>) {
+      return useSWR<GetCitiesQuery, ClientError>(genKey<GetCitiesQueryVariables>('GetCities', variables), () => sdk.getCities(variables), config);
+    },
+    useGetClapStore(variables: GetClapStoreQueryVariables, config?: SWRConfigInterface<GetClapStoreQuery, ClientError>) {
+      return useSWR<GetClapStoreQuery, ClientError>(genKey<GetClapStoreQueryVariables>('GetClapStore', variables), () => sdk.getClapStore(variables), config);
     }
   };
 }

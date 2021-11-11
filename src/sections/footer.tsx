@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import { getCategoryUrl } from '../utils/other';
 import { VendorType } from '../http/generated';
 import { businessName } from '../shared';
+import { isMobile } from "react-device-detect";
 
 
 export function Footer() {
     return (
         <div>
-            <div className="footer">
+            <div className="footer" style={{marginTop: "100px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">

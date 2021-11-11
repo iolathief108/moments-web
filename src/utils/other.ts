@@ -120,7 +120,9 @@ export function getPlaceholder(vType: VendorType): string {
     return "";
 }
 
-
+export function titleCase(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
 
 

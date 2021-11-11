@@ -16,9 +16,13 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.4",
     "@types/react-router-dom": "^5.3.1",
+    "@types/react-slick": "^0.23.7",
     "@types/styled-components": "^5.1.15",
+    "@u-wave/react-vimeo": "^0.9.5",
+    "axios": "^0.24.0",
     "fetch-graphql-schema": "^0.2.1",
     "graphql": "^15.6.1",
+    "graphql-codegen-plugin-typescript-swr": "git+https://github.com/ioLathief/graphql-codegen-plugin-typescript-swr.git",
     "graphql-request": "^3.6.1",
     "graphql-tag": "^2.12.5",
     "normalize.css": "^8.0.1",
@@ -44,9 +48,11 @@
   },
   "scripts": {
     "start": "set PORT=3000 && set BROWSER=none && react-scripts start",
-    "build": "BUILD_PATH='./build/dash' && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen",
+    "fetch": "fetch-graphql-schema http://localhost/api/ -o schema.graphql -r"
   },
   "eslintConfig": {
     "extends": [

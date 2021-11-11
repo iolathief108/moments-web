@@ -27,6 +27,7 @@ function Routes() {
             <Route exact path="/become-a-vendor/" children={<ContactUs />} />
             <Route exact path="/dev" children={<Dev />} />
             <Route exact path="/terms-of-use/" children={<TermsOfUse />} />
+            <Route exact path="/:id/" children={<StoreFront />} />
 
             <Route path="/" children={<NotFound />} />
         </Switch>
@@ -44,7 +45,7 @@ export default function App() {
     );
 }
 
-function NotFound() {
+export function NotFound() {
     const Container = styled.div`
       h1 {
         font-size: 80px;

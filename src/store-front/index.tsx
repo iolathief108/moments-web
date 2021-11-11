@@ -5,13 +5,15 @@ import { Faqs } from "./sections/faqs";
 import { OverviewSection } from "./sections/overview-section";
 import { GallerySection } from "./sections/gallery-section";
 import { ContactBottom } from "./sections/contact-bottom";
-import { ContactPopup } from "./sections/contact-popup";
-import { contactPopupState } from "../state";
-import { VendorDetailsBQuery } from "../http/generated";
+import { VendorDetailsBQuery, VendorType } from "../http/generated";
 import { getCategoryUrl, getVendorTypeInfo } from "../utils/other";
 import SppView from "./sections/spp";
 import { isMobile } from "react-device-detect";
 import * as queryString from "querystring";
+import { LoadingPage } from "../comps/loading";
+import { Highlight } from "./sections/highlight";
+import { VideoGallery } from "./sections/video-gallery";
+import { PopupGlobal } from "./sections/PopupGlobal";
 
 
 type Props = {
@@ -23,24 +25,30 @@ function Breadcrumb(
 ) {
     return (
         <div>
-            <div className={'container'}>
+            <div className={"container"}>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" style={{
-                        backgroundColor: 'transparent',
-                        paddingLeft: 0,
+                        backgroundColor: "transparent",
+                        paddingLeft: 0
                     }}>
                         <li className="breadcrumb-item">
-                            <Link to={'/search'}>
+                            <Link to={"/search"}>
                                 Wedding Vendors
                             </Link>
                         </li>
                         <li className="breadcrumb-item">
-                            <Link to={props.data.vendorDetailsB?.vendor_type ? getCategoryUrl(props.data.vendorDetailsB?.vendor_type) : '/search'}>
+                            <Link
+                                to={props.data.vendorDetailsB?.vendor_type ? getCategoryUrl(props.data.vendorDetailsB?.vendor_type) : "/search"}>
                                 {getVendorTypeInfo(props.data.vendorDetailsB?.vendor_type)?.displayName}
                             </Link>
                         </li>
                         {
-                            <li className="breadcrumb-item active" aria-current="page">{props.data.vendorDetailsB?.business_name}</li>
+                            <li className="breadcrumb-item active"
+                                aria-current="page">{props.data.vendorDetailsB?.business_name}
+                                {
+                                    props.data.vendorDetailsB?.vendor_type === VendorType.Venue && ' Venue'
+                                }
+                            </li>
                         }
                     </ol>
                 </nav>
@@ -51,41 +59,70 @@ function Breadcrumb(
 
 export default function WeddingVendor() {
 
-    const [popupActive] = contactPopupState.useGlobalState('contactPopupActive');
-
-    let param = useParams<{ id: string}>();
+    let param = useParams<{ id: string }>();
 
     const name = param.id as any;
-
 
 
     let his = useLocation();
     const getThat = () => queryString.parse(his.search);
     const vid = getThat().vid as any;
 
-
-    const {data} = sdk.useVendorDetailsB({
-        businessName: name || '',
-        vid: vid || null,
+    const { data } = sdk.useVendorDetailsB({
+        businessName: name || "",
+        vid: vid || null
     });
 
+    if (!data) {
+        return <LoadingPage />;
+    }
     if (!data?.vendorDetailsB) {
-        return <div>Oh dear, this link isn't working.</div>;
+        // return (
+        //     <NotFound/>
+        // )
+        return (
+            <div>Oh dear, this link isn't working.</div>
+        );
     }
 
     return (
         <>
             {
                 !isMobile &&
-                <Breadcrumb data={data}/>
+                <Breadcrumb data={data} />
             }
-            <OverviewSection data={data}/>
-            <GallerySection data={data}/>
-            {popupActive ? <ContactPopup data={data}/> : null}
-            <VendorIntro data={data}/>
-            <Faqs data={data}/>
-            <SppView data={data}/>
-            <ContactBottom data={data}/>
+            <OverviewSection data={data} />
+            {
+                (data.vendorDetailsB.vendor_type === VendorType.BandsDj ||
+                    data.vendorDetailsB.vendor_type === VendorType.Videographer) &&
+                <Highlight data={data} />
+            }
+            {
+                data.vendorDetailsB.vendor_type === VendorType.BandsDj &&
+                <VideoGallery data={data} />
+            }
+            {
+                (data.vendorDetailsB.vendor_type !== VendorType.BandsDj && data.vendorDetailsB.vendor_type !== VendorType.Videographer) &&
+                <GallerySection data={data} />
+            }
+            {
+                (data.vendorDetailsB.vendor_type === VendorType.Venue
+                ) &&
+                <Highlight data={data} />
+            }
+            <VendorIntro data={data} />
+            {
+                data.vendorDetailsB.vendor_type === VendorType.Videographer &&
+                <VideoGallery data={data} />
+            }
+            {
+                data.vendorDetailsB.vendor_type === VendorType.BandsDj &&
+                <GallerySection data={data} />
+            }
+            <SppView data={data} />
+            <Faqs data={data} />
+            <ContactBottom data={data} />
+            <PopupGlobal data={data}/>
         </>
     );
 }
