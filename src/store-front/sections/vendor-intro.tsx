@@ -1,6 +1,7 @@
 import { PersonInfo, VendorDetailsBQuery, VendorType } from "../../http/generated";
 import { contactPopupState } from "../../state";
 import styled from "styled-components";
+import { getBaseUrl } from "../../utils/other";
 
 
 type Weapon = {
@@ -38,6 +39,53 @@ const OptionContainer = styled.div`
 `;
 
 export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
+
+
+    function SocialMedia() {
+        const Container = styled.div`
+
+          margin-top: 20px;
+          @media (max-width: 767px) {
+            margin-top: 16px;
+          }
+          font-size: 14px;
+          //color: #21201f; #767676
+          font-family: proxima-nova, Helvetica, Arial, sans-serif;
+          line-height: 1.42857143;
+
+          a {
+            margin-right: .25em;
+            margin-left: .25em;
+            color: #767676;
+            font-size: 20px;
+            text-decoration: none;
+          }
+        `;
+        return (
+            <Container>
+                {
+                    data.vendorDetailsB?.links?.instagram &&
+                    <a target={"_blank"} href={`${data.vendorDetailsB?.links?.instagram}`}><span
+                        className={"moments-icon-instagram"} /></a>
+                }
+                {
+                    data.vendorDetailsB?.links?.facebook &&
+                    <a target={"_blank"} href={`${data.vendorDetailsB?.links?.facebook}`}><span
+                        className={"moments-icon-facebook"} /></a>
+                }
+                {
+                    data.vendorDetailsB?.links?.pinterest &&
+                    <a target={"_blank"} href={`${data.vendorDetailsB?.links?.pinterest}`}><span
+                        className={"moments-icon-pinterest"} /></a>
+                }
+                {
+                    data.vendorDetailsB?.links?.website &&
+                    <a target={"_blank"} href={`${data.vendorDetailsB?.links?.website}`}><span
+                        className={"moments-icon-globe"} /></a>
+                }
+            </Container>
+        );
+    }
 
 
     const Options = () => {
@@ -86,7 +134,7 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
         }
         return (
             final.map((i, index) => (
-                <span key={index}>
+                <p key={index}>
                     {
                         i.map(
                             (r, index) =>
@@ -96,7 +144,7 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
                                 </span>
                         )
                     }
-                </span>
+                </p>
             ))
         );
     };
@@ -126,16 +174,17 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
 
     const Title = styled.h1`
       font-family: serif;
-      margin-top: 15px;
+      margin-top: 5px;
+      line-height: 40px;
     `;
 
     return (
         <div style={{
-            marginTop: '75px',
-            backgroundColor: '#f9fafc',
-            paddingTop: '10px',
-            paddingBottom:' 65px',
-        }} >
+            marginTop: "75px",
+            backgroundColor: "rgb(246 248 250)",
+            paddingTop: "10px",
+            paddingBottom: " 65px"
+        }}>
             <div className={"container"}>
                 <div className="row" style={{
                     marginTop: "50px"
@@ -144,15 +193,16 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
                         getPersonInfo() &&
                         <div className={"col-xs-12 col-sm-4 text-center"}>
                             <div style={{
-                                backgroundImage: "url(\"/p/" + getPersonInfo().person_photo.id + "_q95.jpg\")",
+                                backgroundImage: `url("${getBaseUrl()}/p/${getPersonInfo().person_photo.id}_q95.jpg")`,
                                 backgroundSize: "cover",
                                 borderRadius: "50%",
-                                width: "180px",
-                                height: "180px",
+                                width: "172px",
+                                height: "172px",
                                 margin: "auto"
                             }} />
-                            <h3 className={"mt-2 mb-0"}>{getPersonInfo().name}</h3>
+                            <h3 style={{fontSize: '1.6rem'}} className={"mt-3 mb-0"}>{getPersonInfo().name}</h3>
                             <div><span>{getPersonInfo().position}</span></div>
+                            <SocialMedia />
                             <button className="mt-3 mb-4 v2-button primary-button footer-button" type="button"
                                     role="button"
                                     style={{ visibility: "visible" }}
@@ -163,18 +213,19 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
                     }
                     <div className={`col-xs-12 col-sm-${!getPersonInfo() ? "6" : "8"}`}>
                         <div className="vendor-intro-section__container ml-secondary">
-                            <Title className="marketplace__h2">About{isVenue() && " This Venue"} {!isVenue() && data.vendorDetailsB?.business_name}</Title>
+                            <Title
+                                className="marketplace__h2">About{isVenue() && " This Venue"} {!isVenue() && data.vendorDetailsB?.business_name}</Title>
                             <div style={{
                                 color: "rgb(0 0 0 / 70%)",
                                 paddingRight: "18px"
                             }} className="vendor-intro-section__body">
-                                <p className="mt-tertiary" style={{
-                                    fontFamily: "proxima-nova,Helvetica,Arial,sans-serif",
+                                <div className="mt-tertiary" style={{
+                                    // fontFamily: "proxima-nova,Helvetica,Arial,sans-serif",
                                     fontSize: "14px",
                                     fontWeight: 400,
-                                    lineHeight: 1.8,
-                                    color: "#505050"
-                                }}>{getDescription()}</p>
+                                    lineHeight: 1.7,
+                                    color: "rgb(66 66 66)"
+                                }}>{getDescription()}</div>
                                 {
                                     !getPersonInfo() &&
                                     <button className="mt-3 v2-button primary-button footer-button" type="button"
@@ -183,6 +234,11 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
                                             onClick={() => contactPopupState.setGlobalState("contactPopupActive", true)}
                                     >Learn More &amp; Inquire
                                     </button>
+                                }
+                                {
+                                    // (data.vendorDetailsB.vendor_type === VendorType.Venue || !getPersonInfo()) &&
+                                    !getPersonInfo() &&
+                                    <SocialMedia />
                                 }
                             </div>
                             {

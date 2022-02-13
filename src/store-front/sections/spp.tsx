@@ -1,11 +1,12 @@
 import { PackageObject, PriceObject, PriceType, Spp, VendorDetailsBQuery, VendorType } from "../../http/generated";
 import styled from "styled-components";
+import { useEffect, useRef, useState } from "react";
 
 
 export default function SppView({ data }: { data: VendorDetailsBQuery }) {
 
     return (
-        <div>
+        <>
             {
                 data.vendorDetailsB.vendor_type === VendorType.BeautyProfessional &&
                 PackageContainer(data.vendorDetailsB.vendorTypes.beauty_professionals_type.pricing, data.vendorDetailsB.business_name)
@@ -38,7 +39,7 @@ export default function SppView({ data }: { data: VendorDetailsBQuery }) {
                 data.vendorDetailsB.vendor_type === VendorType.Venue &&
                 PackageContainer(data.vendorDetailsB.vendorTypes.venue_type.pricing, data.vendorDetailsB.business_name, data.vendorDetailsB.vendor_type)
             }
-        </div>
+        </>
     );
 }
 
@@ -92,19 +93,32 @@ const priceRow = (sppPrice: PriceObject, packageObject: PackageObject) => {
                 {
                     sppPrice.price_type === PriceType.Range &&
                     <span
-                        className={"pricing"}> at {Space}රු {sppPrice.range.from_price.toLocaleString()} - {sppPrice.range.to_price.toLocaleString()}/= {sppPrice.unit}</span>
+                        className={"pricing"}>
+                        {
+                            isName() &&
+                            <>at {Space}</>
+                        }
+                        රු {sppPrice.range.from_price.toLocaleString()} - {sppPrice.range.to_price.toLocaleString()}/= {sppPrice.unit}</span>
                 }
             </p>
         </Container>
     );
 };
 
+let packageHeight = 300;
 const Package = (sppPackage: PackageObject) => {
+    const headerContainerEl = useRef(null);
+    const [height, setHeight] = useState<any>(300);
+
     const Container = styled.div`
-      //box-shadow: rgb(0 0 0 / 10%) 1px 2px 5px 0px;
+
+      //box-shadow: 2px 3px 6px 0 #00000026;
+      box-shadow: rgb(0 0 0 / 14%) 2px 3px 6px -1px;
+      background-color: #e6e6e614;
+
       max-width: 400px;
       min-width: 350px;
-      min-height: 300px;
+      min-height: ${height && height > 300 && height < 1000 ? height : 300}px;
       border: 1px solid #0002;
       border-radius: 2px;
 
@@ -133,11 +147,29 @@ const Package = (sppPackage: PackageObject) => {
         margin-top: 20px;
         font-weight: bold;
         margin-bottom: 0;
+        color: #383838;
       }
     `;
 
+
+    useEffect(() => {
+        setTimeout(() => {
+            let offH = headerContainerEl?.current?.offsetHeight;
+            if (!offH) return;
+            if (packageHeight && packageHeight < offH) {
+                packageHeight = offH;
+            }
+            setHeight(packageHeight);
+        }, 70);
+
+        setTimeout(() => {
+            setHeight(packageHeight);
+        }, 200)
+
+    }, [headerContainerEl]);
+
     return (
-        <Container className={"p-2 mb-4 mr-4 p-4 pr-5"}>
+        <Container ref={headerContainerEl} className={"p-2 mb-4 mr-4 p-4 pr-5"}>
             <h4 className={"name"}>{sppPackage.name}</h4>
             {
                 sppPackage.short &&
@@ -162,6 +194,11 @@ const Package = (sppPackage: PackageObject) => {
 };
 
 const PackageContainer = (pricing: Spp, name: string, vType?: VendorType) => {
+
+    useEffect(() => {
+        packageHeight = 300;
+    }, []);
+
     const Title = styled.h1`
       font-family: serif;
       margin-bottom: 27px;
@@ -173,8 +210,15 @@ const PackageContainer = (pricing: Spp, name: string, vType?: VendorType) => {
     if (!pricing?.packages?.length) {
         return null;
     }
+
+    const Container = styled.div`
+      padding-top: 40px;
+      padding-bottom: 40px;
+    `;
+
+
     return (
-        <div style={{ marginTop: 10 }}>
+        <Container>
             <div className={"container"}>
                 <div className="row">
                     <div className="col-sm-12">
@@ -191,6 +235,6 @@ const PackageContainer = (pricing: Spp, name: string, vType?: VendorType) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };

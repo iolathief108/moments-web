@@ -2,17 +2,19 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "normalize.css";
 import "./styles/globals.scss";
 import "./styles/override.scss";
-import { Footer } from "./sections/footer";
-import { Header } from "./sections/header";
+import { Footer } from "./sections/footer2";
+import Header from "./sections/header";
 import { Home } from "./home";
 import ContactUs from "./sections/contact-us";
 import Dev from "./sections/dev";
-import TermsOfUse from "./sections/terms";
+import Terms from "./sections/terms";
 import Search from "./search";
 import StoreFront from "./store-front";
 import ScrollToTop from './utils/scroll-top';
 import styled from "styled-components";
 import {Link} from 'react-router-dom'
+import VendorReg from "./sections/VendorReg";
+import { Helmet } from "react-helmet";
 
 
 function Routes() {
@@ -24,12 +26,13 @@ function Routes() {
             <Route exact path="/wedding-vendors/:cat/:id/" children={<StoreFront />} />
 
             <Route exact path="/contact-us/" children={<ContactUs />} />
-            <Route exact path="/become-a-vendor/" children={<ContactUs />} />
+            <Route exact path="/become-a-vendor/" children={<VendorReg />} />
             <Route exact path="/dev" children={<Dev />} />
-            <Route exact path="/terms-of-use/" children={<TermsOfUse />} />
+            <Route exact path="/terms/" children={<Terms />} />
             <Route exact path="/:id/" children={<StoreFront />} />
 
-            <Route path="/" children={<NotFound />} />
+            {/*<Route path="/" children={<NotFound />} />*/}
+            <Route path="/" children={<Dev />} />
         </Switch>
     );
 }
@@ -37,6 +40,9 @@ function Routes() {
 export default function App() {
     return (
         <Router>
+            <Helmet>
+                <title>Wedding Vendors and Suppliers Directory - Moments.lk</title>
+            </Helmet>
             <Header />
             <ScrollToTop />
             <Routes />

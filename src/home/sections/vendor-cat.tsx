@@ -1,5 +1,7 @@
 import { commonState } from "../../state";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { Title } from "../common/Title";
 
 
 type ThingProps = {
@@ -33,16 +35,20 @@ function Thing(props: ThingProps) {
 }
 
 export function VendorCat() {
+
+    const Container = styled.div`
+      padding-top: 70px;
+      padding-bottom: 70px;
+      background-color: #ecf7f9;
+    `;
+
     return (
-        <div className={""} style={{
-            backgroundColor: "#ecf7f9",
-            paddingBottom: "50px",
-            paddingTop: "45px"
-        }}>
+        <Container>
             <div className={"container"}>
                 <div className="row">
-                    <h4 className={"col-sm-5 col-lg-4 serif pb-4 pt-md-2 text-center text-sm-left"}>Browse Pre-Screened
-                        Vendors by Category</h4>
+                    {/*<h4 className={"col-sm-5 col-lg-4 serif pb-4 pt-md-2 text-center text-sm-left"}>Browse Pre-Screened*/}
+                    {/*    Vendors by Category</h4>*/}
+                    <Title className={'col-sm-5 col-lg-4 serif pb-4 pt-md-2 text-center text-sm-left'}>Browse Pre-Screened Vendors by Category</Title>
                     <div className={"col-sm-7 col-lg-8"} style={{ paddingLeft: "29px" }}>
                         <div className="row">
                             <Thing link={"/search/wedding-venues"} text={"Venue"}
@@ -65,6 +71,6 @@ export function VendorCat() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }

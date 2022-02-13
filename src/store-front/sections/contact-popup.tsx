@@ -154,7 +154,7 @@ const initState: gProp = {
         message: ""
     }
 };
-export const formState = createGlobalState<gProp>(initState);
+const formState = createGlobalState<gProp>(initState);
 
 const onSubmit = async () => {
     let content = formState.getGlobalState("content");
@@ -492,7 +492,6 @@ const Step3 = () => {
     );
 };
 
-
 const SelectCard = ({ event }: { event: Event }) => {
     const [content, setContent] = formState.useGlobalState("content");
     const onClick = () => {
@@ -608,22 +607,35 @@ export const ContactInfor = {
             </div>
         );
     },
-    Content({}: { data: VendorDetailsBQuery }) {
+    Content({ data }: { data: VendorDetailsBQuery }) {
         return (
             <div>
                 <div style={{ fontSize: "1.1rem", fontFamily: "sans-serif,Roboto" }}>
                     {/*<Thing iconClassName={'fa fa-map-marker'} title={'Address'}*/}
                     {/*       val={'91/16, Dematagoda Road, Colombo-10.'}/>*/}
-                    <ContactInfor.FieldRow iconClassName={"fa fa-phone"} title={"Phone"}
-                                           val={<a style={{ color: "rgb(34 124 255 / 91%)" }} href="tel://+94775737981">077
-                                               5737
-                                               981</a>} />
-                    <ContactInfor.FieldRow iconClassName={"fa fa-paper-plane"}
-                                           title={"Email"}
-                                           val={
-                                               <a style={{ color: "rgb(34 124 255 / 91%)" }}
-                                                  href="mailto:support@moments.lk">support@moments.lk</a>
-                                           } />
+
+                    {
+                        data?.vendorDetailsB?.phone &&
+                        <ContactInfor.FieldRow iconClassName={"fa fa-phone"} title={"Phone"}
+                                               val={<a style={{ color: "rgb(34 124 255 / 91%)" }}
+                                                       href={`tel://${data?.vendorDetailsB?.phone}`}>{data?.vendorDetailsB?.phone}</a>} />
+                    }
+                    {
+                        data?.vendorDetailsB?.address &&
+                        <ContactInfor.FieldRow iconClassName={"fa fa-map-marker"} title={"Address"}
+                                               val={<p style={{ color: "rgb(94 94 94 / 91%)" }}>{data?.vendorDetailsB?.address}</p>} />
+                    }
+                    {/*<ContactInfor.FieldRow iconClassName={"fa fa-phone"} title={"Phone"}*/}
+                    {/*                       val={<a style={{ color: "rgb(34 124 255 / 91%)" }} href="tel://+94775737981">077*/}
+                    {/*                           5737*/}
+                    {/*                           981</a>} />*/}
+
+                    {/*<ContactInfor.FieldRow iconClassName={"fa fa-paper-plane"}*/}
+                    {/*                       title={"Email"}*/}
+                    {/*                       val={*/}
+                    {/*                           <a style={{ color: "rgb(34 124 255 / 91%)" }}*/}
+                    {/*                              href="mailto:support@moments.lk">support@moments.lk</a>*/}
+                    {/*                       } />*/}
                     {/*<Thing iconClassName={'fa fa-globe'} title={'Website'} val={<a href="#">yoursite.com</a>}/>*/}
                 </div>
             </div>
@@ -646,14 +658,6 @@ export const ContactInfor = {
         );
     }
 };
-
-// export function ContactInfo({data}: {data: VendorDetailsBQuery}) {
-//
-//     const Content = ({data}: {data: VendorDetailsBQuery}) => {
-//     };
-//
-//
-// }
 
 const Content = ({}: { data: VendorDetailsBQuery }) => {
     return (

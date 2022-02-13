@@ -5,17 +5,19 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import { VendorType } from "../../http/generated";
 import { useEffect, useState } from "react";
 import { searchState } from "../../state";
+import { SearchView } from "../../comps/SearchView";
 
 
 export function SearchInput() {
 
     const locHook = sdk.useLocations();
     const [vType, setVType] = useState<VendorType | null>(searchState.getGlobalState("vendorType") || null);
+    // const [vType, setVType] = searchState.useGlobalState('vendorType')
     const [districtKey, setDistrictKey] = useState<string>(searchState.getGlobalState("districtKey") || "");
 
-    const [vTypeSec] = searchState.useGlobalState("vTypeSec");
-    const [disKeySec] = searchState.useGlobalState("disKeySec");
-    const [districtThing] = searchState.useGlobalState("districtKey");
+    const [vTypeSec, setVTypeSec] = searchState.useGlobalState("vTypeSec");
+    // const [disKeySec] = searchState.useGlobalState("disKeySec");
+    // const [districtThing] = searchState.useGlobalState("districtKey");
     const location = useLocation();
 
     const param = useParams<{ id?: string; }>();
@@ -25,6 +27,7 @@ export function SearchInput() {
             setDistrictKey(undefined);
             setVType(undefined);
         }else {
+            // console.log(param.id);
             setDistrictKey(locHook.data?.districts.length ? searchState.getGlobalState("districtKey") || "" : "");
             setVType(vType || vTypeSec);
         }
@@ -56,47 +59,57 @@ export function SearchInput() {
 
     return (
         <div>
+
             <div className="filter-form" style={{
                 backgroundColor: "#fff",
                 padding: "20px",
                 border: "1px solid #e6e5e7",
-                marginBottom: "20px"
+                marginBottom: "20px",
             }}>
                 <div className="container">
-                    <div className="row">
-                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div className="form-row">
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                                    <SelectSearch
-                                        options={localVendorTypes.map(value => ({
-                                            name: value.displayName,
-                                            value: value.vendorType
-                                        })) || []}
-                                        value={vType || vTypeSec || undefined}
-                                        onChange={(v: any) => setVType(v)}
-                                        filterOptions={fuzzySearch}
-                                        placeholder="What vendor are your looking for?"
-                                        search={true}
-                                    />
-                                </div>
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                                    <SelectSearch
-                                        options={locHook.data?.districts?.map(value => ({
-                                            name: value.name,
-                                            value: value.key
-                                        })) || []}
-                                        filterOptions={fuzzySearch}
-                                        onChange={(v: any) => setDistrictKey(v)}
-                                        value={districtKey || disKeySec || districtThing}
-                                        placeholder="Where are you getting married?"
-                                        search={true}
-                                    />
-                                </div>
-                                <div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 ">
-                                    <button className="btn btn-default btn-block" onClick={onSearchClick}>Search
-                                    </button>
-                                </div>
-                            </div>
+                    <div style={{maxWidth: '750px'}}>
+
+                        <div className="row">
+                            {/*<div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">*/}
+                            {/*    <div className="form-row">*/}
+
+                            <SearchView vType={vType || vTypeSec} onClick={onSearchClick} districtKey={districtKey} setDistrictKey={setDistrictKey} districts={locHook.data?.districts}
+                                        setVType={
+                                            // setVTypeSec
+                                            setVType
+                                        }/>
+                            {/*<div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">*/}
+                            {/*    <SelectSearch*/}
+                            {/*        options={localVendorTypes.map(value => ({*/}
+                            {/*            name: value.displayName,*/}
+                            {/*            value: value.vendorType*/}
+                            {/*        })) || []}*/}
+                            {/*        value={vType || vTypeSec || undefined}*/}
+                            {/*        onChange={(v: any) => setVType(v)}*/}
+                            {/*        filterOptions={fuzzySearch}*/}
+                            {/*        placeholder="What vendor are your looking for?"*/}
+                            {/*        search={true}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+                            {/*<div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">*/}
+                            {/*    <SelectSearch*/}
+                            {/*        options={locHook.data?.districts?.map(value => ({*/}
+                            {/*            name: value.name,*/}
+                            {/*            value: value.key*/}
+                            {/*        })) || []}*/}
+                            {/*        filterOptions={fuzzySearch}*/}
+                            {/*        onChange={(v: any) => setDistrictKey(v)}*/}
+                            {/*        value={districtKey || disKeySec || districtThing}*/}
+                            {/*        placeholder="Where are you getting married?"*/}
+                            {/*        search={true}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+                            {/*<div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 ">*/}
+                            {/*    <button className="btn btn-default btn-block" onClick={onSearchClick}>Search*/}
+                            {/*    </button>*/}
+                            {/*</div>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

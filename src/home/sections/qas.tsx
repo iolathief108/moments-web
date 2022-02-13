@@ -1,5 +1,7 @@
-import {FunctionComponent, useState} from 'react';
+import { FunctionComponent, useEffect, useState } from "react";
 import {commonState} from '../../state';
+import styled from "styled-components";
+import { Title } from "../common/Title";
 
 
 export function Line() {
@@ -60,10 +62,14 @@ export const Qa = (props: QaProps) => {
     const [isMobile] = commonState.useGlobalState('isMobile');
     const [open, setOpen] = useState<boolean>(!isMobile);
 
+    useEffect(() => {
+        setOpen(!isMobile)
+    }, [isMobile])
+
     return (
-        <div style={{}}>
-            <Question isClosed={open} question={props.question} clickAction={() => setOpen(!open)}/>
-            <Answer isClosed={open} answer={props.answer}/>
+        <div>
+            <Question isClosed={!open} question={props.question} clickAction={() => setOpen(!open)}/>
+            <Answer isClosed={!open} answer={props.answer}/>
             <Line/>
         </div>
     );
@@ -71,11 +77,17 @@ export const Qa = (props: QaProps) => {
 
 
 export const Qas = () => {
+    const Container = styled.div`
+      padding-top: 70px;
+      padding-bottom: 70px;
+    `;
+
     return (
-        <div className={'container pt-5 pb-5'}>
+        <Container className={'container'}>
             <div className="row">
                 <div className="col-lg-4">
-                    <h4 className={'serif text-center text-sm-left h3 pb-4 pt-lg-3'}>Frequently Asked Questions</h4>
+                    {/*<h4 className={'serif text-center text-sm-left h3 pb-4 pt-lg-3'}>Frequently Asked Questions</h4>*/}
+                    <Title className={'serif text-center text-sm-left pb-4 pt-lg-3'}>Frequently Asked Questions</Title>
                 </div>
                 <div className={'col-lg-8'}>
                     <Line/>
@@ -84,7 +96,7 @@ export const Qas = () => {
                     <Qa question={'Which wedding vendors should we reach out to first?'} answer={'If you’re just starting to plan, we recommend finding a Venue first. Already have a venue? We’ll Help You Look for a Photographer who can capture every moment of your special day. Checked off both of those to-dos? We’ll help you find these vendors, too: Videographer, Caterer, Florist, and Beauty Professional (with more to come!).'}/>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 

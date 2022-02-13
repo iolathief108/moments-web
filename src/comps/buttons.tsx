@@ -13,7 +13,7 @@ export function BlueButton(props: ButtonHTMLAttributes<any>) {
       font-family: proxima-nova, Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-weight: 600;
-      height: 52px;
+      min-width: 90px;
       justify-content: center;
       padding-left: 16px;
       padding-right: 16px;

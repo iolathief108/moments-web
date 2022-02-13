@@ -275,7 +275,6 @@ function MobileView({ data }: { data: VendorDetailsBQuery }) {
     );
 }
 
-
 export function VideoGallery({ data }: { data: VendorDetailsBQuery }) {
     const getTitle = () => {
         switch (data.vendorDetailsB.vendor_type) {
@@ -294,6 +293,13 @@ export function VideoGallery({ data }: { data: VendorDetailsBQuery }) {
         text-align: center;
       }
     `;
+
+    console.log(data.vendorDetailsB.vendorTypes.band_djs_type.videoSample);
+    if ( !data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length || !data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length ) {
+        console.log('hei');
+        return null
+    }
+
     return (
         <div>
             <div className={"hidden-xs"}>

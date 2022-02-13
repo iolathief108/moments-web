@@ -8,7 +8,7 @@ import { isMobile } from "react-device-detect";
 export function Footer() {
     return (
         <div>
-            <div className="footer" style={{marginTop: "100px" }}>
+            <div className="footer" style={{marginTop: "0px" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">

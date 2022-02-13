@@ -1,4 +1,5 @@
 import { LocationsQuery, VendorType } from "../http/generated";
+import { isDev } from "./pageUtils";
 
 
 type LocalVendorTypes = {
@@ -6,6 +7,7 @@ type LocalVendorTypes = {
     vendorType: VendorType;
     displayName: string;
     slug: string;
+    headerText: string
 }
 
 export const localVendorTypes: LocalVendorTypes[] = [
@@ -13,49 +15,64 @@ export const localVendorTypes: LocalVendorTypes[] = [
         key: "wedding-caterer",
         displayName: "Wedding Caterer",
         vendorType: VendorType.Caterer,
-        slug: "wedding-catering"
+        slug: "wedding-catering",
+        headerText: "Wedding Catering",
     },
     {
         key: "wedding-venue",
         displayName: "Wedding Venue",
         vendorType: VendorType.Venue,
-        slug: "wedding-venue"
+        slug: "wedding-venue",
+        headerText: "Wedding Venues & Banquet Halls",
     },
     {
         key: "wedding-photographer",
         displayName: "Wedding Photographer",
         vendorType: VendorType.Photographer,
-        slug: "wedding-photographer"
+        slug: "wedding-photographer",
+        headerText: "Wedding Photographers",
     },
     {
         key: "wedding-videographer",
         displayName: "Wedding Videographer",
         vendorType: VendorType.Videographer,
-        slug: "wedding-videographer"
+        slug: "wedding-videographer",
+        headerText: "Wedding Videographers",
     },
     {
-        key: "wedding-bands-dj",
-        displayName: "Bands & DJs",
+        key: "jewellery",
+        displayName: "Jewelleries",
         vendorType: VendorType.BandsDj,
-        slug: "wedding-bands-djs"
+        slug: "jewelleries",
+        headerText: "Jewelleries",
     },
+    // {
+    //     key: "wedding-bands-dj",
+    //     displayName: "Bands & DJs",
+    //     vendorType: VendorType.BandsDj,
+    //     slug: "wedding-bands-djs",
+    //     headerText: "Wedding Bands and DJs",
+    // },
     {
         key: "wedding-beauty-professionals",
         displayName: "Wedding Beauty Professionals",
         vendorType: VendorType.BeautyProfessional,
-        slug: "wedding-beauty-professionals"
+        slug: "wedding-beauty-professionals",
+        headerText: "Wedding Hair and Bridal Makeup Artists",
     },
     {
         key: "wedding-cakes-desserts",
         displayName: "Wedding Cakes Desserts",
         vendorType: VendorType.CakesDessert,
-        slug: "wedding-cakes-desserts"
+        slug: "wedding-cakes-desserts",
+        headerText: "Wedding Cakes & Desserts",
     },
     {
         key: "wedding-florists",
         displayName: "Wedding Florists",
         vendorType: VendorType.Florist,
-        slug: "wedding-florists"
+        slug: "wedding-florists",
+        headerText: "Wedding Florists",
     }
 ];
 
@@ -121,12 +138,38 @@ export function getPlaceholder(vType: VendorType): string {
 }
 
 export function titleCase(s: string) {
-    return s.charAt(0).toUpperCase() + s.slice(1)
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+export function getBaseUrl() {
+    if (isDev) {
+        return "https://www.moments.lk";
+        // return "";
+    }
+    return "";
+}
 
-
-
+export function getVendorTypeIcon(vType: VendorType) {
+    switch (vType) {
+        case VendorType.BandsDj:
+            return "/images/cat/bands_dj.svg";
+        case VendorType.Florist:
+            return "/images/cat/bouquet.svg";
+        case VendorType.Photographer:
+            return "/images/cat/camera.svg";
+        case VendorType.BeautyProfessional:
+            return "/images/cat/hair_makeup.svg";
+        case VendorType.Caterer:
+            return "/images/cat/mixer.svg";
+        case VendorType.Venue:
+            return "/images/cat/venue.svg";
+        case VendorType.Videographer:
+            return "/images/cat/video.svg";
+        case VendorType.CakesDessert:
+            return "/images/cat/wedding_cake.svg";
+    }
+    return "/images/cat/wedding_cake.svg";
+}
 
 
 

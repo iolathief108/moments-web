@@ -14,6 +14,7 @@ import { LoadingPage } from "../comps/loading";
 import { Highlight } from "./sections/highlight";
 import { VideoGallery } from "./sections/video-gallery";
 import { PopupGlobal } from "./sections/PopupGlobal";
+import { Helmet } from "react-helmet";
 
 
 type Props = {
@@ -46,7 +47,7 @@ function Breadcrumb(
                             <li className="breadcrumb-item active"
                                 aria-current="page">{props.data.vendorDetailsB?.business_name}
                                 {
-                                    props.data.vendorDetailsB?.vendor_type === VendorType.Venue && ' Venue'
+                                    props.data.vendorDetailsB?.vendor_type === VendorType.Venue && " Venue"
                                 }
                             </li>
                         }
@@ -85,8 +86,19 @@ export default function WeddingVendor() {
         );
     }
 
+    const getHeaderText = () => {
+        // return "Wedding Vendors and Suppliers - Moments.lk"
+        let location = data.vendorDetailsB.searchLocations.length && data.vendorDetailsB.searchLocations[0].name.replace(" (1 - 15)", "");
+        let type = getVendorTypeInfo(data.vendorDetailsB?.vendor_type)?.displayName;
+        return `${data.vendorDetailsB?.business_name} | ${type && type} ${location && (" in " + location)} | Moments.lk`;
+    };
+
+
     return (
         <>
+            <Helmet>
+                <title>{getHeaderText()}</title>
+            </Helmet>
             {
                 !isMobile &&
                 <Breadcrumb data={data} />
@@ -98,11 +110,14 @@ export default function WeddingVendor() {
                 <Highlight data={data} />
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.BandsDj &&
+                data.vendorDetailsB.vendor_type === VendorType.BandsDj && !!data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length &&
                 <VideoGallery data={data} />
             }
             {
-                (data.vendorDetailsB.vendor_type !== VendorType.BandsDj && data.vendorDetailsB.vendor_type !== VendorType.Videographer) &&
+                (
+                    (data.vendorDetailsB.vendor_type !== VendorType.BandsDj && data.vendorDetailsB.vendor_type !== VendorType.Videographer) ||
+                    (data.vendorDetailsB.vendor_type === VendorType.BandsDj && !data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length)
+                ) &&
                 <GallerySection data={data} />
             }
             {
@@ -116,13 +131,13 @@ export default function WeddingVendor() {
                 <VideoGallery data={data} />
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.BandsDj &&
+                data.vendorDetailsB.vendor_type === VendorType.BandsDj && !!data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length &&
                 <GallerySection data={data} />
             }
             <SppView data={data} />
             <Faqs data={data} />
             <ContactBottom data={data} />
-            <PopupGlobal data={data}/>
+            <PopupGlobal data={data} />
         </>
     );
 }

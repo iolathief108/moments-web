@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VendorDetailsBQuery } from "../../http/generated";
 import styled from "styled-components";
 
@@ -139,10 +139,14 @@ export const Qa = (props: QaProps) => {
     const [isMobile] = commonState.useGlobalState("isMobile");
     const [open, setOpen] = useState<boolean>(!isMobile);
 
+    useEffect(() => {
+        setOpen(!isMobile)
+    }, [isMobile])
+
     return (
         <div >
-            <Question isClosed={open} question={props.question} clickAction={() => setOpen(!open)} />
-            <Answer isClosed={open} answer={props.answer} />
+            <Question isClosed={!open} question={props.question} clickAction={() => setOpen(!open)} />
+            <Answer isClosed={!open} answer={props.answer} />
             <Line />
         </div>
     );
@@ -150,10 +154,17 @@ export const Qa = (props: QaProps) => {
 
 
 export const Faqs = ({ data }: { data: VendorDetailsBQuery }) => {
+    const Container = styled.div`
+      padding-top: 80px;
+      padding-bottom: 80px;
+    `;
+
     if (!data.vendorDetailsB?.frequent_questions.length)
         return null;
     return (
-        <div className={"container"} style={{marginTop: 40}}>
+        <Container className={"container"}
+                   // style={{marginTop: 40}}
+        >
             <div>
                 <h1 className={"serif text-center text-sm-left pb-3 mt-0"}>Frequently Asked Questions</h1>
                 <span className={'pt-0'} style={{fontSize: '15px', color: '#444', paddingBottom: '-10px', display: "inline-block"}}>{data.vendorDetailsB?.frequent_questions.length} Questions</span>
@@ -166,7 +177,7 @@ export const Faqs = ({ data }: { data: VendorDetailsBQuery }) => {
                     }
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 

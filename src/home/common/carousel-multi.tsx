@@ -2,45 +2,75 @@ import Slider, { Settings } from "react-slick";
 import { commonState } from "../../state";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 
 type ItemProps = {
     img: string
     name: string
     link: string
+    icon: string
 }
-const Item = ({ img, name, link }: ItemProps) => {
-    const [mousePos, setMousePos] = useState<number>(undefined);
+const Item = ({ img, name, link, icon }: ItemProps) => {
     const [isMobile] = commonState.useGlobalState("isMobile");
     const history = useHistory();
+    let mousePos = undefined;
+
+    const A1 = styled.a`
+      ${isMobile ? "width: 240px" : ""};
+
+      .text {
+        background-color: rgb(255, 255, 255);
+        color: rgb(0 0 0 / 85%);
+        
+        //margin: 4px;
+        //padding-left: 8px;
+        //padding-right: 14px;
+        font-weight: 500;
+        font-size: 14px;
+        font-family: roboto, sans-serif;
+      }
+
+      > div {
+        cursor: pointer;
+        display: inline-block;
+
+        &:hover .text{
+          color: #0075ae;
+          //rgb(85, 85, 85)
+        }
+
+        > div {
+          box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
+          background-color: #fff;
+          border-radius: 0 0 3px 4px;
+
+          > div {
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+          }
+        }
+      }
+    `;
 
     if (isMobile === undefined) return null;
 
     return (
-        <a
-            onClick={e => {
-                if (mousePos === undefined || mousePos === e.clientX) {
+        <A1
+            onMouseUp={e => {
+                if (e.button !== 0) return;
+                if (mousePos === e.clientX) {
                     history.push(link);
                 }
-
             }}
             onMouseDown={e => {
-                setMousePos(e.clientX);
+                mousePos = e.clientX;
             }}
-            style={{
-                width: isMobile ? "240px" : null
-            }}>
-            <div className={"pl-2 pr-2 pt-2 pb-2"} style={{ cursor: "pointer", display: "inline-block" }}>
-                <div style={{
-                    boxShadow: "1px 2px 6px 0px #00000029",
-                    borderRadius: "5px",
-                    backgroundColor: "#fff"
-                }}>
-                    <div style={{
-                        borderRadius: "5px",
-                        overflow: "hidden",
-                        cursor: "pointer"
-                    }}>
+        >
+            <div className={"pl-2 pr-2 pt-2 pb-2"}>
+                <div>
+                    <div>
                         <img height={"290px"} style={{
                             objectFit: "cover"
                         }} width={"240px"} src={img} />
@@ -49,14 +79,18 @@ const Item = ({ img, name, link }: ItemProps) => {
                             paddingTop: "3px",
                             paddingBottom: "3px"
                         }}>
-                            <p className={"text-capitalize font-weight-bold"}><i style={{ paddingRight: "3px" }}
-                                                                                 className={"fa fa-map-marker-alt"} /> {name}
-                            </p>
+                            <img width={30}
+                                 style={{ display: "inline-block", marginRight: "4px", paddingBottom: "3px" }}
+                                 src={icon} />
+                            <span className={"text text-capitalize"}>
+                                {/*<i style={{ paddingRight: "3px" }} className={"fa fa-map-marker-alt"} /> */}
+                                {name}
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
+        </A1>
     );
 };
 
@@ -65,6 +99,7 @@ type CarouselProps = {
         url: string
         name: string
         link: string
+        icon: string
     }[]
 }
 
@@ -121,7 +156,8 @@ export function CarouselMulti(props: CarouselProps) {
                     display: "inline-flex"
                 }}>
                     {
-                        props.urls.map((value, index) => <Item key={index} link={value.link} img={value.url}
+                        props.urls.map((value, index) => <Item key={index} icon={value.icon} link={value.link}
+                                                               img={value.url}
                                                                name={value.name} />)
                     }
                 </div>
@@ -135,7 +171,8 @@ export function CarouselMulti(props: CarouselProps) {
         }}>
             <Slider {...settings}>
                 {
-                    props.urls.map((value, index) => <Item key={index} link={value.link} img={value.url}
+                    props.urls.map((value, index) => <Item key={index} icon={value.icon} link={value.link}
+                                                           img={value.url}
                                                            name={value.name} />)
                 }
             </Slider>
