@@ -15,6 +15,7 @@ import { Highlight } from "./sections/highlight";
 import { VideoGallery } from "./sections/video-gallery";
 import { PopupGlobal } from "./sections/PopupGlobal";
 import { Helmet } from "react-helmet";
+import { NotFound } from "../App";
 
 
 type Props = {
@@ -82,15 +83,20 @@ export default function WeddingVendor() {
         //     <NotFound/>
         // )
         return (
-            <div>Oh dear, this link isn't working.</div>
+            <div>
+                {/*<p>Oh dear, this link isn't working.</p>*/}
+                <NotFound/>
+            </div>
         );
     }
 
     const getHeaderText = () => {
         // return "Wedding Vendors and Suppliers - Moments.lk"
-        let location = data.vendorDetailsB.searchLocations.length && data.vendorDetailsB.searchLocations[0].name.replace(" (1 - 15)", "");
-        let type = getVendorTypeInfo(data.vendorDetailsB?.vendor_type)?.displayName;
-        return `${data.vendorDetailsB?.business_name} | ${type && type} ${location && (" in " + location)} | Moments.lk`;
+        const location = data.vendorDetailsB.searchLocations.length && data.vendorDetailsB.searchLocations[0].name
+            .replace(" (1 - 15)", "")
+            .replace(" - Greater", "");
+        const type = getVendorTypeInfo(data.vendorDetailsB?.vendor_type)?.headerText;
+        return `${data.vendorDetailsB?.business_name} | ${type && type}${location ? ` in ${location}, Sri Lanka`: ` in Sri Lanka`} | Moments.lk`;
     };
 
 

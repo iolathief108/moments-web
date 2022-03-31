@@ -13,6 +13,7 @@ import { LoadingPage } from "../../comps/loading";
 import { End } from "../comps/End";
 import { Helmet } from "react-helmet";
 import { getVendorTypeInfo } from "../../utils/other";
+import styled from "styled-components";
 
 
 const getKey: SWRInfiniteKeyLoader<VendorSearchQuery, VendorSearchQueryVariables> = (pageIndex, previousPageData) => {
@@ -52,7 +53,7 @@ function ConnectionNodes(props: ConNodesProps) {
 
             let d = width / 3 - 25;
             if (width < 800) {
-                d = width /1 -5
+                d = width / 1 - 5;
             }
             let ddd = `${d * 0.65}px`;
             // console.log(ddd);
@@ -86,50 +87,19 @@ function ConnectionNodes(props: ConNodesProps) {
 }
 
 export function SearchResult(props: SearchResultProps) {
+
     const [vType, setVType] = searchState.useGlobalState("vendorType");
     const [districtId, setDistrictId] = searchState.useGlobalState("districtId");
-    const locHook = sdk.useLocations();
 
     const [, setVTypeSec] = searchState.useGlobalState("vTypeSec");
     const [, setDisIdSec] = searchState.useGlobalState("disKeySec");
+    const [districtKey, setDisKey] = searchState.useGlobalState("districtKey");
     const param = useParams<{ id?: string; }>();
     const [id, setId] = useState(typeof param.id === "string" ? param.id : undefined);
 
+    const locHook = sdk.useLocations();
     const location = useLocation();
-    useEffect(() => {
-        setTimeout(() => {
-            setId(param.id || "");
-            if (!param.id) {
-                setVType(undefined);
-                setDistrictId(undefined);
-            }
-        }, 100);
-    }, [location]);
 
-
-    const { data, size, setSize, isValidating } = sdk.useVendorSearchInfinite(getKey, {
-        vendorType: vType,
-        districtID: districtId,
-        searchQuery: id || ""
-    }, {
-        initialData: props.initialData
-    });
-
-    useEffect(() => {
-        if (!param.id) {
-            // console.log('changed');
-            setVTypeSec(undefined);
-            setVType(undefined);
-            setDisIdSec(undefined);
-        }
-        if (!vType && !districtId && param.id) {
-            if (data && data[0].vendorSearchWithExtra.vendor_type)
-                setVTypeSec(data[0].vendorSearchWithExtra.vendor_type);
-
-            if (data && data[0].vendorSearchWithExtra.district_key)
-                setDisIdSec(data[0].vendorSearchWithExtra.district_key);
-        }
-    }, [data]);
 
     useEffect(() => {
         return () => {
@@ -141,6 +111,71 @@ export function SearchResult(props: SearchResultProps) {
         };
     }, []);
 
+    useEffect(() => {
+        let no = false;
+        setTimeout(() => {
+            if (no) return;
+            setId(param.id || "");
+            if (!param.id) {
+                setVType(undefined);
+                setDistrictId(undefined);
+            }
+        }, 45);
+        return () => {
+            no = true;
+        };
+    }, [location]);
+
+    const { data, size, setSize, isValidating } = sdk.useVendorSearchInfinite(getKey, {
+        vendorType: undefined,
+        districtID: undefined,
+        searchQuery: id?.replace("jewellery", "band") || ""
+    }, {
+        // initialData: props.initialData,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        revalidateAll: false
+    });
+
+    useEffect(() => {
+        if (!param.id) {
+            // console.log('changed');
+            setVTypeSec(undefined);
+            setVType(undefined);
+            setDisIdSec(undefined);
+        } else {
+
+            if (data && data[0].vendorSearchWithExtra.vendor_type) {
+                setVType(data[0].vendorSearchWithExtra.vendor_type);
+                setVTypeSec(data[0].vendorSearchWithExtra.vendor_type);
+            }
+
+            if (data && data[0].vendorSearchWithExtra.district_key) {
+                setDisIdSec(data[0].vendorSearchWithExtra.district_key);
+                setDisKey(data[0].vendorSearchWithExtra.district_key);
+            }
+        }
+        // if (!vType && !districtId && param.id) {
+        //     if (data && data[0].vendorSearchWithExtra.vendor_type) {
+        //         console.log(data[0].vendorSearchWithExtra.vendor_type);
+        //         setVType(data[0].vendorSearchWithExtra.vendor_type);
+        //         setVTypeSec(data[0].vendorSearchWithExtra.vendor_type);
+        //     }
+        //
+        //     if (data && data[0].vendorSearchWithExtra.district_key) {
+        //         setDisIdSec(data[0].vendorSearchWithExtra.district_key);
+        //         setDisKey(data[0].vendorSearchWithExtra.district_key);
+        //     }
+        // }
+    }, [data]);
+
+    // const { data, size, setSize, isValidating } = sdk.useVendorSearchInfinite(getKey, {
+    //     vendorType: vType,
+    //     districtID: districtId,
+    //     searchQuery: id || ""
+    // }, {
+    //     initialData: props.initialData
+    // });
     const isDisable = () => {
         if (!data) return false;
         return !data[data?.length - 1]?.vendorSearchWithExtra.pageInfo.hasNextPage;
@@ -159,27 +194,60 @@ export function SearchResult(props: SearchResultProps) {
     if (!data) return <LoadingPage />;
 
     const getHeaderText = () => {
-        let name
-        let district
+        let name;
+        let district;
         if (vType) {
-            name = getVendorTypeInfo(vType).headerText;
+            name = getVendorTypeInfo(vType).headerTextPlural;
         }
-        if (districtId) {
-            locHook.data.districts.forEach(v => {
-                if (v.id === districtId) {
-                    district = v.name
+        if (districtKey) {
+            locHook?.data?.districts.forEach(v => {
+                if (v.key === districtKey) {
+                    district = v.name;
                 }
-            })
+            });
         }
 
-        let header = `${name ? `${name}s` : 'Wedding Vendors'}${district ? ` in ${district}, Sri Lanka` : ' in Sri Lanka'} - Moments.lk`
-        return header
-    }
+        let header = `${name ? `${name}` : "Wedding Vendors & Suppliers"}${district ? ` in ${district}, Sri Lanka` : " in Sri Lanka - Moments.lk"}`;
+        return header;
+    };
+
+    const getTitleText = () => {
+        let name;
+        let district;
+        if (vType) {
+            name = getVendorTypeInfo(vType).headerTextPlural;
+        }
+        if (districtKey) {
+            locHook?.data?.districts.forEach(v => {
+                if (v.key === districtKey) {
+                    district = v.name;
+                }
+            });
+        }
+
+        let header = `${name ? `${name}` : "Wedding Vendors & Suppliers"}${district ? ` in ${district}, Sri Lanka` : " in Sri Lanka"}`;
+        return header;
+    };
+
+    const Title = styled.h1`
+      font-family: poynter-oldstyle-display, serif;
+      font-size: 32px;
+      font-weight: 500;
+      margin-top: 0.48em;
+      margin-bottom: 18px;
+      color: #21201f;
+    `;
+
     return (
         <>
             <Helmet>
                 <title>{getHeaderText()}</title>
             </Helmet>
+            <div style={{ paddingBottom: "15px" }} className="content">
+                <div className="container">
+                    <Title>{getTitleText()}</Title>
+                </div>
+            </div>
             <ConnectionNodes conNodes={getConNodes()} />
             <div className={"container"}>
                 {

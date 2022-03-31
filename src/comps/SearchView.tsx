@@ -23,10 +23,24 @@ const Drop = ({
 
 
     const [active, setActive] = useState<boolean>(false);
+
+    useEffect(() => {
+        function dd(event) {
+            if (!event.target.matches(".dropdown-btn, .dropdown-btn span")) {
+                toggle(false)();
+            }
+        }
+
+        window.addEventListener("click", dd);
+        return () => {
+            window.removeEventListener("click", dd);
+        };
+    }, []);
+
     const Container = styled.div`
       position: relative;
       display: inline-block;
-      min-width: 190px;
+      min-width: 270px;
       @media (max-width: 767px) {
         min-width: 100%;
       }
@@ -35,7 +49,7 @@ const Drop = ({
         cursor: pointer;
         display: flex;
         justify-content: space-between;
-        padding: 9px 4px 9px 12px;
+        padding: 9px 7px 9px 12px;
 
         background-color: #fff;
         border: 2px solid ${active ? "#0075ae" : "#d9d9d9"};
@@ -89,19 +103,6 @@ const Drop = ({
         setActive(!active);
     };
 
-    useEffect(() => {
-        function dd(event) {
-            if (!event.target.matches(".dropdown-btn, .dropdown-btn span")) {
-                toggle(false)();
-            }
-        }
-
-        window.addEventListener("click", dd);
-        return () => {
-            window.removeEventListener("click", dd);
-        };
-    }, []);
-
     const getSelectedName = () => {
 
         // console.log(selected, ar);
@@ -117,13 +118,14 @@ const Drop = ({
     };
 
     return (
-        <Container style={{maxWidth: '100%', width: '100%'}}>
+        <Container style={{ maxWidth: "100%", width: "100%" }}>
             <div className={"d-flex align-items-center dropdown-btn"} onClick={toggle()}>
                 <span style={{
-                    overflow:"hidden",
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis'
-                }} >{getSelectedName() || placeholder}</span>
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    paddingRight: '15px'
+                }}>{getSelectedName() || placeholder}</span>
                 <span className={`arrow mr-1 fa fa-chevron-${active ? "up" : "down"} d-flex align-items-center`}></span>
             </div>
             {
@@ -142,59 +144,68 @@ const Drop = ({
 
 export function SearchView(props: SearchViewProps) {
 
+    const ElementContainer = styled.div`
+      max-width: 270px;
+      @media (max-width: 767px) {
+        max-width: 100%;
+        min-width: 100%;
+        margin-bottom: 15px;
+      }
+
+      @media (min-width: 767px) {
+        margin-right: 20px;
+      }
+    `;
+
+    const Button = styled.button`
+      padding-right: 30px;
+      padding-left: 30px;
+      display: flex;
+      align-items: center;
+    `;
 
     return (
-        <>
-            <div style={{ minHeight: "44px" }} className="pb-2 col-12 col-sm-6 col-md-4 pr-sm-0">
-
-                <Drop
-                    ar={localVendorTypes.map(value => ({
-                        name: value.displayName.replace("Wedding", ""),
-                        value: value.vendorType
-                    })) || []}
-                    placeholder="Photographers, Hotels & More"
-                    selected={props.vType || undefined}
-                    onClick={v => props.setVType(v as any)} />
-
-                {/*<SelectSearch*/}
-                {/*    options={localVendorTypes.map(value => ({*/}
-                {/*        name: value.displayName.replace("Wedding", ""),*/}
-                {/*        value: value.vendorType*/}
-                {/*    })) || []}*/}
-                {/*    value={props.vType || undefined}*/}
-                {/*    onChange={(v: any) => props.setVType(v)}*/}
-                {/*    filterOptions={fuzzySearch}*/}
-                {/*    placeholder="Photographers, Hotels & More..."*/}
-                {/*    search={true}*/}
-                {/*/>*/}
+        <div style={{ display: "inline-block", textAlign: "left" }}>
+            <div style={{ display: "inline-flex", flexWrap: "wrap" }}>
+                <ElementContainer>
+                    <Drop
+                        ar={localVendorTypes.map(value => ({
+                            name: value.displayName.replace("Wedding", ""),
+                            value: value.vendorType
+                        })) || []}
+                        placeholder="Photographers, Hotels & More"
+                        selected={props.vType || undefined}
+                        onClick={v => props.setVType(v as any)} />
+                    {/*<SelectSearch*/}
+                    {/*    options={localVendorTypes.map(value => ({*/}
+                    {/*        name: value.displayName.replace("Wedding", ""),*/}
+                    {/*        value: value.vendorType*/}
+                    {/*    })) || []}*/}
+                    {/*    value={props.vType || undefined}*/}
+                    {/*    onChange={(v: any) => props.setVType(v)}*/}
+                    {/*    filterOptions={fuzzySearch}*/}
+                    {/*    placeholder="Photographers, Hotels & More..."*/}
+                    {/*    search={true}*/}
+                    {/*/>*/}
+                </ElementContainer>
+                <ElementContainer>
+                    <Drop
+                        ar={props.districts?.map(value => ({
+                            name: value.name,
+                            value: value.key
+                        })) || []}
+                        placeholder="Colombo, Gampaha & Many location"
+                        selected={props.districtKey || undefined}
+                        onClick={v => props.setDistrictKey(v as any)} />
+                </ElementContainer>
+                <ElementContainer style={{marginBottom: '0'}}>
+                    <Button className="btn btn-default btn-block"
+                            style={{ height: "44px"}}
+                            onClick={props.onClick}>Search
+                    </Button>
+                </ElementContainer>
             </div>
-            {/*<div className="pb-2 col-12 col-sm-6 col-md-4">*/}
-            {/*    <Drop*/}
-            {/*        ar={props.districts?.map(value => ({*/}
-            {/*            name: value.name,*/}
-            {/*            value: value.key*/}
-            {/*        })) || []}*/}
-            {/*        placeholder="Colombo, Gampaha & Many location"*/}
-            {/*        selected={props.districtKey || undefined}*/}
-            {/*        onClick={v => props.setDistrictKey(v as any)} />*/}
+        </div>
 
-                {/*<SelectSearch*/}
-                {/*    options={props.districts?.map(value => ({*/}
-                {/*        name: value.name,*/}
-                {/*        value: value.key*/}
-                {/*    })) || []}*/}
-                {/*    filterOptions={fuzzySearch}*/}
-                {/*    onChange={(v: any) => props.setDistrictKey(v)}*/}
-                {/*    value={props.districtKey}*/}
-                {/*    placeholder="Colombo, Gampaha & Many location"*/}
-                {/*    search={true}*/}
-                {/*/>*/}
-            {/*</div>*/}
-            <div className="pb-2 col-12 col-md-4">
-                <button className="p-0 btn btn-default btn-block" style={{ height: "100%", width: "100%", minHeight: "40px" }}
-                        onClick={props.onClick}>Search
-                </button>
-            </div>
-        </>
     );
 }

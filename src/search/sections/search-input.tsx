@@ -6,113 +6,86 @@ import { VendorType } from "../../http/generated";
 import { useEffect, useState } from "react";
 import { searchState } from "../../state";
 import { SearchView } from "../../comps/SearchView";
+import styled from "styled-components";
 
 
 export function SearchInput() {
 
     const locHook = sdk.useLocations();
-    const [vType, setVType] = useState<VendorType | null>(searchState.getGlobalState("vendorType") || null);
-    // const [vType, setVType] = searchState.useGlobalState('vendorType')
-    const [districtKey, setDistrictKey] = useState<string>(searchState.getGlobalState("districtKey") || "");
+
+    const [vTypeG, setVTypeG] = searchState.useGlobalState("vendorType");
+    const [districtKey, setDistrictKey] = searchState.useGlobalState("districtKey");
+
+    const [vendorTypeLocal, setVendorTypeLocal] = useState<VendorType | null>(searchState.getGlobalState("vendorType") || null);
+    const [districtKeyLocal, setDistrictKeyLocal] = useState<string>(searchState.getGlobalState("districtKey") || "");
 
     const [vTypeSec, setVTypeSec] = searchState.useGlobalState("vTypeSec");
-    // const [disKeySec] = searchState.useGlobalState("disKeySec");
-    // const [districtThing] = searchState.useGlobalState("districtKey");
     const location = useLocation();
 
-    const param = useParams<{ id?: string; }>();
+    const param = useParams<{ id?: string; }>(); // param.id === wedding-venue--colombo-1-15
 
     useEffect(() => {
         if (!param.id) {
-            setDistrictKey(undefined);
-            setVType(undefined);
-        }else {
-            // console.log(param.id);
-            setDistrictKey(locHook.data?.districts.length ? searchState.getGlobalState("districtKey") || "" : "");
-            setVType(vType || vTypeSec);
+            setDistrictKeyLocal(undefined);
+            setVendorTypeLocal(undefined);
+        } else {
+            setDistrictKeyLocal(locHook.data?.districts.length ? searchState.getGlobalState("districtKey") || "" : "");
+            setVendorTypeLocal(searchState.getGlobalState("vendorType") || null);
         }
-    }, [location]);
+    }, [location, vTypeG, districtKey]);
 
     const router = useHistory();
 
     async function onSearchClick() {
 
-        let searchString: string = getVendorTypeInfo(vType)?.key ?? "";
-        searchString = searchString + (searchString && districtKey ? "--" + districtKey : "");
+        let searchString: string = getVendorTypeInfo(vendorTypeLocal)?.slugPlural || "";
+        searchString = searchString + (searchString && districtKeyLocal ? "--" + districtKeyLocal : "");
         if (!searchString)
-            searchString = searchString || districtKey || "";
-        if (vType)
-            searchState.setGlobalState("vendorType", vType);
-        else
-            searchState.setGlobalState("vendorType", null);
+            searchString = searchString || districtKeyLocal || "";
 
-        if (districtKey && locHook.data) {
-            searchState.setGlobalState("districtKey", districtKey);
-            searchState.setGlobalState("districtId", getDistrictId(locHook.data, districtKey));
-        } else {
-            searchState.setGlobalState("districtKey", null);
-            searchState.setGlobalState("districtId", null);
+        if (vTypeG) {
+            searchState.setGlobalState("vendorType", vendorTypeLocal);
         }
-        await router.push("/search/" + searchString);
+        if (districtKey && locHook.data) {
+            searchState.setGlobalState("districtKey", districtKeyLocal);
+        }
 
+        await router.push("/search/" + searchString);
     }
 
+    const Line = styled.div`
+      @media (min-width: 767px) {
+        width: 70%;
+      }
+      border-bottom: 2px #e6e5e7 solid;
+      margin-top: 20px;
+    `;
+
+    const ModP = styled.p`
+      color: #767676;
+      font-weight: 500;
+      margin-left: 3px;
+      margin-bottom: 8px;
+    `
+
     return (
-        <div>
-
-            <div className="filter-form" style={{
-                backgroundColor: "#fff",
-                padding: "20px",
-                border: "1px solid #e6e5e7",
-                marginBottom: "20px",
-            }}>
-                <div className="container">
-                    <div style={{maxWidth: '750px'}}>
-
-                        <div className="row">
-                            {/*<div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">*/}
-                            {/*    <div className="form-row">*/}
-
-                            <SearchView vType={vType || vTypeSec} onClick={onSearchClick} districtKey={districtKey} setDistrictKey={setDistrictKey} districts={locHook.data?.districts}
-                                        setVType={
-                                            // setVTypeSec
-                                            setVType
-                                        }/>
-                            {/*<div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">*/}
-                            {/*    <SelectSearch*/}
-                            {/*        options={localVendorTypes.map(value => ({*/}
-                            {/*            name: value.displayName,*/}
-                            {/*            value: value.vendorType*/}
-                            {/*        })) || []}*/}
-                            {/*        value={vType || vTypeSec || undefined}*/}
-                            {/*        onChange={(v: any) => setVType(v)}*/}
-                            {/*        filterOptions={fuzzySearch}*/}
-                            {/*        placeholder="What vendor are your looking for?"*/}
-                            {/*        search={true}*/}
-                            {/*    />*/}
-                            {/*</div>*/}
-                            {/*<div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">*/}
-                            {/*    <SelectSearch*/}
-                            {/*        options={locHook.data?.districts?.map(value => ({*/}
-                            {/*            name: value.name,*/}
-                            {/*            value: value.key*/}
-                            {/*        })) || []}*/}
-                            {/*        filterOptions={fuzzySearch}*/}
-                            {/*        onChange={(v: any) => setDistrictKey(v)}*/}
-                            {/*        value={districtKey || disKeySec || districtThing}*/}
-                            {/*        placeholder="Where are you getting married?"*/}
-                            {/*        search={true}*/}
-                            {/*    />*/}
-                            {/*</div>*/}
-                            {/*<div className="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 ">*/}
-                            {/*    <button className="btn btn-default btn-block" onClick={onSearchClick}>Search*/}
-                            {/*    </button>*/}
-                            {/*</div>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-                        </div>
-                    </div>
+        <div className="filter-form" style={{
+            padding: "20px",
+            paddingBottom: '5px'
+        }}>
+            <div className="container">
+                <div style={{ maxWidth: "750px" }}>
+                    <ModP>Search Our Pre-Screened Vendors</ModP>
+                    <SearchView
+                        onClick={onSearchClick}
+                        districts={locHook.data?.districts}
+                        vType={vendorTypeLocal}
+                        districtKey={districtKeyLocal}
+                        setDistrictKey={setDistrictKeyLocal}
+                        setVType={setVendorTypeLocal}
+                    />
                 </div>
+                <Line />
             </div>
         </div>
     );

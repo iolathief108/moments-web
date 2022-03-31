@@ -13,66 +13,35 @@ import { Title } from "../common/Title";
 
 
 const SearchThing = () => {
-    const [vType, setVType] = useState<VendorType | null>(null);
+    const [vTypeG, setVTypeG] = useState<VendorType | null>(null);
     const locHook = sdk.useLocations();
     const [districtKey, setDistrictKey] = useState<string>("");
+
+    const [vendorTypeLocal, setVendorTypeLocal] = useState<VendorType | null>(searchState.getGlobalState("vendorType") || null);
+    const [districtKeyLocal, setDistrictKeyLocal] = useState<string>(searchState.getGlobalState("districtKey") || "");
 
     const router = useHistory();
 
     async function onSearchClick() {
-        let searchString: string = getVendorTypeInfo(vType)?.key ?? "";
-        searchString = searchString + (districtKey ? (vType ? "--" : "" + districtKey) : "");
-        if (vType)
-            searchState.setGlobalState("vendorType", vType);
-        else
-            searchState.setGlobalState("vendorType", null);
 
-        if (districtKey && locHook.data) {
-            searchState.setGlobalState("districtKey", districtKey);
-            searchState.setGlobalState("districtId", getDistrictId(locHook.data, districtKey));
-        } else {
-            searchState.setGlobalState("districtKey", null);
-            searchState.setGlobalState("districtId", null);
+        let searchString: string = getVendorTypeInfo(vendorTypeLocal)?.slugPlural || "";
+        searchString = searchString + (searchString && districtKeyLocal ? "--" + districtKeyLocal : "");
+        if (!searchString)
+            searchString = searchString || districtKeyLocal || "";
+
+        if (vTypeG) {
+            searchState.setGlobalState("vendorType", vendorTypeLocal);
         }
+        if (districtKey && locHook.data) {
+            searchState.setGlobalState("districtKey", districtKeyLocal);
+        }
+
         await router.push("/search/" + searchString);
     }
 
     return (
         <div className="search-form" style={{ maxWidth: "750px", backgroundColor: "transparent", margin: "unset" }}>
-            <div className="row">
-                <SearchView vType={vType} onClick={onSearchClick} districtKey={districtKey} setDistrictKey={setDistrictKey} districts={locHook.data?.districts} setVType={setVType}/>
-                {/*<div className="pb-2 col-12 col-sm-6 col-md-4 pr-sm-0">*/}
-                {/*    <SelectSearch*/}
-                {/*        options={localVendorTypes.map(value => ({*/}
-                {/*            name: value.displayName.replace("Wedding", ""),*/}
-                {/*            value: value.vendorType*/}
-                {/*        })) || []}*/}
-                {/*        value={vType || undefined}*/}
-                {/*        onChange={(v: any) => setVType(v)}*/}
-                {/*        filterOptions={fuzzySearch}*/}
-                {/*        placeholder="Photographers, Hotels & More..."*/}
-                {/*        search={true}*/}
-                {/*    />*/}
-                {/*</div>*/}
-                {/*<div className="pb-2 col-12 col-sm-6 col-md-4">*/}
-                {/*    <SelectSearch*/}
-                {/*        options={locHook.data?.districts?.map(value => ({*/}
-                {/*            name: value.name,*/}
-                {/*            value: value.key*/}
-                {/*        })) || []}*/}
-                {/*        filterOptions={fuzzySearch}*/}
-                {/*        onChange={(v: any) => setDistrictKey(v)}*/}
-                {/*        value={districtKey}*/}
-                {/*        placeholder="Colombo, Gampaha & Many location"*/}
-                {/*        search={true}*/}
-                {/*    />*/}
-                {/*</div>*/}
-                {/*<div className="pb-2 col-12 col-md-4">*/}
-                {/*    <button className="p-0 btn btn-default btn-block" style={{ height: "100%", width: "100%" }}*/}
-                {/*            onClick={onSearchClick}>Search*/}
-                {/*    </button>*/}
-                {/*</div>*/}
-            </div>
+                <SearchView vType={vTypeG} onClick={onSearchClick} districtKey={districtKey} setDistrictKey={setDistrictKey} districts={locHook.data?.districts} setVType={setVTypeG}/>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import { businessName } from "../shared";
 import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { FootTexts } from "./foot-texts";
 
 
 function Detail() {
@@ -92,6 +93,7 @@ function Detail() {
                 </li>
             </ul>
             <div className="copyright">© <span className="date">2021</span> A & C Consultants Lanka Pvt Ltd. All rights reserved.</div>
+            <div>Website Design & Development by <a href="https://www.anclanka.lk/">Anclanka.lk</a></div>
             <ul className="terms-links">
                 <li><a href="/privacy" target="_blank">Privacy Policy</a></li>
                 <li><a href="/terms" target="_blank">Terms of Use</a></li>
@@ -102,6 +104,7 @@ function Detail() {
 }
 
 function Links() {
+
     const Container = styled.div`
       box-sizing: border-box;
       //float: left;
@@ -132,6 +135,7 @@ function Links() {
       }
 
     `;
+
     return (
         <Container className={"fitem col-12 col-md-6 col-lg-4"}>
             <div className={"group"}><h3>Quick Links</h3>
@@ -197,7 +201,7 @@ function Address() {
 }
 
 export function Footer() {
-    const Container = styled.div`
+    const Container = styled.footer`
       padding-top: 30px;
       padding-bottom: 30px;
       border-top: 1px solid #d9d9d9;
@@ -211,8 +215,11 @@ export function Footer() {
       }
     `;
     return (
-        <Container>
+        <Container className={'footer'}>
             <div className={"container"}>
+                {/*<div className={'row'}>*/}
+                {/*    <FootTexts/>*/}
+                {/*</div>*/}
                 <div className={"row"}>
                     <Detail />
                     <Links />

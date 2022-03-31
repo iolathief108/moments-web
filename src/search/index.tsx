@@ -13,9 +13,8 @@ export default () => {
 
     const getHeaderText = () => {
         if (vType) {
-            let name = getVendorTypeInfo(vType).displayName
-            // console.log(name);
-            return `Search for ${name} in Sri Lanka - Moments.lk`
+            let name = getVendorTypeInfo(vType).headerTextPlural
+            return `Search for ${name} in Sri Lanka | Wedding Supplier in Sri Lanka - Moments.lk`
         }
         return "Search Wedding Vendors and Suppliers - Moments.lk"
     }

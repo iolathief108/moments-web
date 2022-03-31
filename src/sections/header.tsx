@@ -1,9 +1,20 @@
-import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { localVendorTypes } from "../utils/other";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { getCategoryUrl, getVendorTypeInfo, localVendorTypes } from "../utils/other";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { isDev } from "../utils/pageUtils";
+import { VendorType } from "../http/generated";
 
+
+export function NavLiItem({ id, link, name }: { id?: string, link: string, name: string }) {
+    return (
+        <li className={"nav-item"}>
+            <Link to={link} className="nav-link" id={id}>
+                {name}
+            </Link>
+        </li>
+    );
+}
 
 function NavThing({ history }: RouteComponentProps) {
     const navButton = useRef(null);
@@ -30,27 +41,28 @@ function NavThing({ history }: RouteComponentProps) {
             </button>
             <div ref={navbar} className="collapse navbar-collapse" id="navbar-classic">
                 <ul className="navbar-nav ml-auto mt-2 mt-lg-0 mr-3">
-                    <li className="nav-item">
-                        <Link to={"/"} className="nav-link" id={"menu-1"}>
-                            Home
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to={"/search/"} className="nav-link" id="menu-2">
-                            Find
-                        </Link>
-                    </li>
+                    <NavLiItem link={"/"} name={"Home"} />
+                    {/*<NavLiItem link={"/search/"} name={"Find"} />*/}
+                    <NavLiItem link={getCategoryUrl(VendorType.Photographer)}
+                               name={"Photographers"} />
+                    <NavLiItem link={getCategoryUrl(VendorType.Caterer)}
+                               name={getVendorTypeInfo(VendorType.Caterer).headerTextPlural} />
+                    <NavLiItem link={getCategoryUrl(VendorType.BandsDj)}
+                               name={getVendorTypeInfo(VendorType.BandsDj).headerTextPlural} />
+                    <NavLiItem link={getCategoryUrl(VendorType.BeautyProfessional)}
+                               name={"Makeup Artist"} />
+
+
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" id="menu-3"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Suppliers
-                        </a>
+                        <Link to={"/search/"} className="nav-link dropdown-toggle" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                            All Suppliers
+                        </Link>
                         <ul className="dropdown-menu" aria-labelledby="menu-3">
                             {
                                 localVendorTypes.map(i => (
                                     <li key={i.key}>
-                                        <Link to={`/search/${i.slug}`} className="dropdown-item">
+                                        <Link to={`/search/${i.slugPlural}`} className="dropdown-item">
                                             {i.displayName}
                                         </Link>
                                     </li>
@@ -59,8 +71,8 @@ function NavThing({ history }: RouteComponentProps) {
                         </ul>
                     </li>
                 </ul>
-                {/*<a href="/become-a-vendor" target={isDev ? undefined : "_blank" }*/}
-                {/*   className="btn btn-default btn-sm mt-3 mt-lg-0">Become a Vendor</a>*/}
+                <a href="/become-a-vendor" target={isDev ? undefined : "_blank"}
+                   className="btn btn-default btn-sm mt-3 mt-lg-0">Become a Vendor</a>
             </div>
         </>
     );
@@ -85,6 +97,7 @@ export default function Header() {
           padding-top: 0;
         }
       }
+
       .logo {
         height: 35px;
         @media (max-width: 767px) {
@@ -104,14 +117,14 @@ export default function Header() {
 
     return (
         <div>
-            <div style={{ height: height || "90px" }}/>
+            <div style={{ height: height || "90px" }} />
             <Header className="header">
                 <div ref={headerContainerEl} className="container">
                     <div className="row">
                         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <nav className="navbar navbar-expand-lg navbar-classic">
-                                <Link className={'navbar-brand p-0'} to="/">
-                                     <img className={'logo'} src="/images/logo-large2.png" alt="" />
+                                <Link className={"navbar-brand p-0"} to="/">
+                                    <img className={"logo"} src="/images/logo-large2.png" alt="" />
                                 </Link>
                                 <WithNav />
                             </nav>

@@ -39,11 +39,15 @@ const SIZES = [
     // { ht: 150, wd: 400 },
 ];
 
-function buildUrl(str: string, ht: number, wd: number, _?: number) {
+function buildUrl(str: string, ht?: number, wd?: number, _?: number) {
 
-    // return `/p/${str}_q90.jpg`;
-    // if (q) return `/p/${str}_${wd}x${ht}q${q}.jpg`;
-    return getBaseUrl()+`/p/${str}_${wd}x${ht}q40.jpg`;
+    if (!ht) return getBaseUrl() + `/p/${str}.jpg`;
+
+    if (!wd) return getBaseUrl() + `/p/${str}_q${ht}.jpg`;
+
+    if (!_) return getBaseUrl() + `/p/${str}_${wd}x${ht}.jpg`;
+
+    return getBaseUrl() + `/p/${str}_${wd}x${ht}q${_}.jpg`;
 }
 
 function chooseNear(goal: number, counts: number[]) {
@@ -169,7 +173,6 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                 if (!(index % cols)) prevRowImages = [];
                 let imageResized;
                 try {
-
                     const dssds = (index: number, maxLenght: number): [dim[], number] => {
                         let r = index;
                         while ((r - 1) % cols) {
@@ -206,13 +209,18 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                 } catch (e) {
                     console.log(e);
                 }
+
                 let dd = port(image.ht, imageResized?.x || image.wd);
+                const src = buildUrl(image.id, image.ht < dd.ht ? image.ht : dd.ht, image.wd < dd.wd ? image.wd : dd.wd, 90);
+                // const src = buildUrl(image.id, dd.ht, dd.wd, 90);
+
+                const srcSet = `${src} ${dd.wd}w, ${buildUrl(image.id, 95)} ${image.wd}w`;
+
                 return {
-                    src: (() => {
-                        return buildUrl(image.id, dd.ht, dd.wd, 95);
-                    })(),
+                    src,
                     width: dd.wd,
-                    height: dd.ht
+                    height: dd.ht,
+                    srcSet
                 };
             }
         ) || [];
@@ -224,7 +232,9 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                 <img style={{
                     display: "block",
                     margin: `${margin}px`,
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    objectFit: "cover",
+                    objectPosition: "center"
                 }} src={photo.src} key={index}
                      onClick={() => {
                          setIndex(index);
@@ -232,8 +242,7 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                      }}
                      width={photo.width}
                      height={photo.height}
-                    // width={photo.height <= 500 ? photo.width : photo.width * 500 / photo.height}
-                    // height={photo.height <= 500 ? photo.height : 500}
+                     srcSet={photo.srcSet as string}
                 />
             );
         }, []
@@ -248,7 +257,6 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                     position: "relative",
                     transition: `max-height ${isMobile ? 0.6 : 0.3}s ease`
                 }}>
-                    {/*<div className={'row'}>*/}
                     <div className="col-md-12 col-sm-12" style={{
                         paddingRight: isMobile ? "5px" : null,
                         paddingLeft: isMobile ? "5px" : null
@@ -260,7 +268,6 @@ export function GallerySection({ data }: { data: VendorDetailsBQuery; }) {
                             direction="row"
                             photos={getPhotos()} />
                     </div>
-                    {/*</div>*/}
                     {
                         galleryFold &&
                         <div style={{

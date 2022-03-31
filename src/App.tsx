@@ -10,11 +10,12 @@ import Dev from "./sections/dev";
 import Terms from "./sections/terms";
 import Search from "./search";
 import StoreFront from "./store-front";
-import ScrollToTop from './utils/scroll-top';
+import ScrollToTop from "./utils/scroll-top";
 import styled from "styled-components";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import VendorReg from "./sections/VendorReg";
 import { Helmet } from "react-helmet";
+import { SiteMap, SiteMapVendors } from "./sections/site-map";
 
 
 function Routes() {
@@ -29,10 +30,15 @@ function Routes() {
             <Route exact path="/become-a-vendor/" children={<VendorReg />} />
             <Route exact path="/dev" children={<Dev />} />
             <Route exact path="/terms/" children={<Terms />} />
+
+            <Route exact path="/site-map" children={<SiteMap />} />
+            <Route exact path="/site-map/vendors/" children={<SiteMapVendors />} />
+            <Route exact path="/site-map/vendors/:id" children={<SiteMapVendors />} />
+
             <Route exact path="/:id/" children={<StoreFront />} />
 
-            {/*<Route path="/" children={<NotFound />} />*/}
-            <Route path="/" children={<Dev />} />
+            {/*<Route path="/" children={<Dev />} />*/}
+            <Route path="/" children={<NotFound />} />
         </Switch>
     );
 }
@@ -82,13 +88,14 @@ export function NotFound() {
         max-width: 360px;
         margin: 15% auto;
       }
-    `
+    `;
     return (
         <Container>
             <div className="container">
                 <h1>404</h1>
                 <h2>Page Not Found</h2>
-                <p>The Page you are looking for doesn't exist or an other error occured. Go to <Link to="/">Home Page.</Link>
+                <p>The Page you are looking for doesn't exist or an other error occured. Go to <Link to="/">Home
+                    Page.</Link>
                 </p>
             </div>
         </Container>

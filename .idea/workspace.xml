@@ -29,13 +29,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/loc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="ts.external.directory.path" value="C:\Users\iolat\Documents\Projects\moments\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -45,11 +45,11 @@
       <recent name="C:\Users\iolat\Desktop\moments\src\http" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\iolat\Documents\Projects\moments\src\sections" />
       <recent name="C:\Users\iolat\Documents\Projects\moments\public\images" />
       <recent name="C:\Users\iolat\Documents\Projects\moments\public" />
       <recent name="C:\Users\iolat\Desktop\moments\src\store-front\sections" />
       <recent name="C:\Users\iolat\Desktop\moments\src\home" />
-      <recent name="C:\Users\iolat\Desktop\moments\src" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

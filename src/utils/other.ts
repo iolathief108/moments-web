@@ -7,7 +7,9 @@ type LocalVendorTypes = {
     vendorType: VendorType;
     displayName: string;
     slug: string;
+    slugPlural: string;
     headerText: string
+    headerTextPlural: string;
 }
 
 export const localVendorTypes: LocalVendorTypes[] = [
@@ -15,36 +17,46 @@ export const localVendorTypes: LocalVendorTypes[] = [
         key: "wedding-caterer",
         displayName: "Wedding Caterer",
         vendorType: VendorType.Caterer,
-        slug: "wedding-catering",
+        slug: "catering",
+        slugPlural: "caterings",
         headerText: "Wedding Catering",
+        headerTextPlural: "Wedding Caterings"
     },
     {
         key: "wedding-venue",
         displayName: "Wedding Venue",
         vendorType: VendorType.Venue,
-        slug: "wedding-venue",
-        headerText: "Wedding Venues & Banquet Halls",
+        slug: "venue",
+        slugPlural: "venues-and-banquet-halls",
+        headerText: "Wedding Venue, Banquet Hall",
+        headerTextPlural: "Wedding Venues & Banquet Halls"
     },
     {
         key: "wedding-photographer",
         displayName: "Wedding Photographer",
         vendorType: VendorType.Photographer,
-        slug: "wedding-photographer",
-        headerText: "Wedding Photographers",
+        slug: "photographer",
+        slugPlural: "photographers",
+        headerText: "Wedding Photographer",
+        headerTextPlural: "Wedding Photographers"
     },
     {
         key: "wedding-videographer",
         displayName: "Wedding Videographer",
         vendorType: VendorType.Videographer,
         slug: "wedding-videographer",
-        headerText: "Wedding Videographers",
+        slugPlural: "videographers",
+        headerText: "Wedding Videographer",
+        headerTextPlural: "Wedding Videographers"
     },
     {
         key: "jewellery",
         displayName: "Jewelleries",
         vendorType: VendorType.BandsDj,
-        slug: "jewelleries",
-        headerText: "Jewelleries",
+        slug: "jewellery-store",
+        slugPlural: "jewellery-stores",
+        headerText: "Jewellery Store",
+        headerTextPlural: "Jewellery Stores"
     },
     // {
     //     key: "wedding-bands-dj",
@@ -57,22 +69,28 @@ export const localVendorTypes: LocalVendorTypes[] = [
         key: "wedding-beauty-professionals",
         displayName: "Wedding Beauty Professionals",
         vendorType: VendorType.BeautyProfessional,
-        slug: "wedding-beauty-professionals",
-        headerText: "Wedding Hair and Bridal Makeup Artists",
+        slug: "hair-bridal-makeup-artist",
+        slugPlural: "hair-bridal-makeup-artists",
+        headerText: "Wedding Hair and Bridal Makeup Artist",
+        headerTextPlural: "Wedding Hair and Bridal Makeup Artists"
     },
     {
         key: "wedding-cakes-desserts",
         displayName: "Wedding Cakes Desserts",
         vendorType: VendorType.CakesDessert,
-        slug: "wedding-cakes-desserts",
-        headerText: "Wedding Cakes & Desserts",
+        slug: "baker",
+        slugPlural: "wedding-cakes-desserts",
+        headerText: "Wedding Cake & Dessert, Baker",
+        headerTextPlural: "Wedding Cakes & Desserts"
     },
     {
         key: "wedding-florists",
         displayName: "Wedding Florists",
         vendorType: VendorType.Florist,
-        slug: "wedding-florists",
-        headerText: "Wedding Florists",
+        slug: "wedding-florist",
+        slugPlural: "florists",
+        headerText: "Wedding Florist",
+        headerTextPlural: "Wedding Florists"
     }
 ];
 
@@ -117,7 +135,7 @@ export function getImageUrl(
 }
 
 export function getCategoryUrl(cat: VendorType): string {
-    return `/search/${getVendorTypeInfo(cat)?.key}`;
+    return `/search/${getVendorTypeInfo(cat)?.slugPlural}`;
 }
 
 export function getProductUrl(businessName: string, vType: VendorType, vid?: string) {
@@ -143,7 +161,7 @@ export function titleCase(s: string) {
 
 export function getBaseUrl() {
     if (isDev) {
-        return "https://www.moments.lk";
+        // return "https://www.moments.lk";
         // return "";
     }
     return "";
