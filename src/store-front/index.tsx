@@ -111,18 +111,18 @@ export default function WeddingVendor() {
             }
             <OverviewSection data={data} />
             {
-                (data.vendorDetailsB.vendor_type === VendorType.BandsDj ||
+                (data.vendorDetailsB.vendor_type === VendorType.Jewellery ||
                     data.vendorDetailsB.vendor_type === VendorType.Videographer) &&
                 <Highlight data={data} />
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.BandsDj && !!data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length &&
+                data.vendorDetailsB.vendor_type === VendorType.Jewellery && !!data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length &&
                 <VideoGallery data={data} />
             }
             {
                 (
-                    (data.vendorDetailsB.vendor_type !== VendorType.BandsDj && data.vendorDetailsB.vendor_type !== VendorType.Videographer) ||
-                    (data.vendorDetailsB.vendor_type === VendorType.BandsDj && !data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length)
+                    (data.vendorDetailsB.vendor_type !== VendorType.Jewellery && data.vendorDetailsB.vendor_type !== VendorType.Videographer) ||
+                    (data.vendorDetailsB.vendor_type === VendorType.Jewellery && !data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length)
                 ) &&
                 <GallerySection data={data} />
             }
@@ -137,7 +137,7 @@ export default function WeddingVendor() {
                 <VideoGallery data={data} />
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.BandsDj && !!data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length &&
+                data.vendorDetailsB.vendor_type === VendorType.Jewellery && !!data.vendorDetailsB.vendorTypes.band_djs_type.videoSample?.length &&
                 <GallerySection data={data} />
             }
             <SppView data={data} />

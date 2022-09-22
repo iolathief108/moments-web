@@ -15,44 +15,44 @@ type LocalVendorTypes = {
 export const localVendorTypes: LocalVendorTypes[] = [
     {
         key: "wedding-caterer",
-        displayName: "Wedding Caterer",
+        displayName: "Caterer",
         vendorType: VendorType.Caterer,
         slug: "catering",
         slugPlural: "caterings",
-        headerText: "Wedding Catering",
-        headerTextPlural: "Wedding Caterings"
+        headerText: "Catering",
+        headerTextPlural: "Caterings"
     },
     {
         key: "wedding-venue",
-        displayName: "Wedding Venue",
+        displayName: "Venue",
         vendorType: VendorType.Venue,
         slug: "venue",
         slugPlural: "venues-and-banquet-halls",
-        headerText: "Wedding Venue, Banquet Hall",
-        headerTextPlural: "Wedding Venues & Banquet Halls"
+        headerText: "Venue, Banquet Hall",
+        headerTextPlural: "Venues & Banquet Halls"
     },
     {
         key: "wedding-photographer",
-        displayName: "Wedding Photographer",
+        displayName: "Photographer",
         vendorType: VendorType.Photographer,
         slug: "photographer",
         slugPlural: "photographers",
-        headerText: "Wedding Photographer",
-        headerTextPlural: "Wedding Photographers"
+        headerText: "Photographer",
+        headerTextPlural: "Photographers"
     },
     {
         key: "wedding-videographer",
-        displayName: "Wedding Videographer",
+        displayName: "Videographer",
         vendorType: VendorType.Videographer,
         slug: "wedding-videographer",
         slugPlural: "videographers",
-        headerText: "Wedding Videographer",
-        headerTextPlural: "Wedding Videographers"
+        headerText: "Videographer",
+        headerTextPlural: "Videographers"
     },
     {
         key: "jewellery",
         displayName: "Jewelleries",
-        vendorType: VendorType.BandsDj,
+        vendorType: VendorType.Jewellery,
         slug: "jewellery-store",
         slugPlural: "jewellery-stores",
         headerText: "Jewellery Store",
@@ -63,34 +63,34 @@ export const localVendorTypes: LocalVendorTypes[] = [
     //     displayName: "Bands & DJs",
     //     vendorType: VendorType.BandsDj,
     //     slug: "wedding-bands-djs",
-    //     headerText: "Wedding Bands and DJs",
+    //     headerText: "Bands and DJs",
     // },
     {
         key: "wedding-beauty-professionals",
-        displayName: "Wedding Beauty Professionals",
+        displayName: "Beauty Professionals",
         vendorType: VendorType.BeautyProfessional,
         slug: "hair-bridal-makeup-artist",
         slugPlural: "hair-bridal-makeup-artists",
-        headerText: "Wedding Hair and Bridal Makeup Artist",
-        headerTextPlural: "Wedding Hair and Bridal Makeup Artists"
+        headerText: "Hair and Bridal Makeup Artist",
+        headerTextPlural: "Hair and Bridal Makeup Artists"
     },
     {
         key: "wedding-cakes-desserts",
-        displayName: "Wedding Cakes Desserts",
+        displayName: "Cakes Desserts",
         vendorType: VendorType.CakesDessert,
         slug: "baker",
         slugPlural: "wedding-cakes-desserts",
-        headerText: "Wedding Cake & Dessert, Baker",
-        headerTextPlural: "Wedding Cakes & Desserts"
+        headerText: "Cake & Dessert, Baker",
+        headerTextPlural: "Cakes & Desserts"
     },
     {
         key: "wedding-florists",
-        displayName: "Wedding Florists",
+        displayName: "Florists",
         vendorType: VendorType.Florist,
         slug: "wedding-florist",
         slugPlural: "florists",
-        headerText: "Wedding Florist",
-        headerTextPlural: "Wedding Florists"
+        headerText: "Florist",
+        headerTextPlural: "Florists"
     }
 ];
 
@@ -161,7 +161,7 @@ export function titleCase(s: string) {
 
 export function getBaseUrl() {
     if (isDev) {
-        // return "https://www.moments.lk";
+        return "https://www.moments.lk";
         // return "";
     }
     return "";
@@ -169,7 +169,7 @@ export function getBaseUrl() {
 
 export function getVendorTypeIcon(vType: VendorType) {
     switch (vType) {
-        case VendorType.BandsDj:
+        case VendorType.Jewellery:
             return "/images/cat/bands_dj.svg";
         case VendorType.Florist:
             return "/images/cat/bouquet.svg";

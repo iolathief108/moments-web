@@ -108,7 +108,7 @@ const getServicePricing = (vDetails: VendorDetailsBQuery): ServicePricing[] => {
     switch (vDetails.vendorDetailsB.vendor_type) {
         case VendorType.Videographer:
             return vDetails.vendorDetailsB.vendorTypes.videographer_type?.servicePricing?.pricings;
-        case VendorType.BandsDj:
+        case VendorType.Jewellery:
             return vDetails.vendorDetailsB.vendorTypes.band_djs_type?.servicePricing?.pricings;
         case VendorType.Photographer:
             return vDetails.vendorDetailsB.vendorTypes.photographer_type?.servicePricing?.pricings;

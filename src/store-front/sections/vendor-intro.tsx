@@ -161,7 +161,7 @@ export function VendorIntro({ data }: { data: VendorDetailsBQuery }) {
                 return data.vendorDetailsB.vendorTypes.cakes_desserts_type.personInfo;
             case VendorType.Florist:
                 return data.vendorDetailsB.vendorTypes.florists_type.personInfo;
-            case VendorType.BandsDj:
+            case VendorType.Jewellery:
                 return data.vendorDetailsB.vendorTypes.band_djs_type.personInfo;
             case VendorType.Videographer:
                 return data.vendorDetailsB.vendorTypes.videographer_type.personInfo;

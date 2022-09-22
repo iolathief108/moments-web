@@ -6,7 +6,7 @@ import { VimeoEmbed } from "../comps/vimeo";
 export function Highlight({ data }: { data: VendorDetailsBQuery }) {
     const getHigh = ():VideoUrl => {
         switch (data.vendorDetailsB.vendor_type) {
-            case VendorType.BandsDj:
+            case VendorType.Jewellery:
                 return data.vendorDetailsB.vendorTypes?.band_djs_type?.hightlight
             case VendorType.Venue:
                 return data.vendorDetailsB.vendorTypes?.venue_type?.hightlight

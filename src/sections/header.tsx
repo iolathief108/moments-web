@@ -45,10 +45,10 @@ function NavThing({ history }: RouteComponentProps) {
                     {/*<NavLiItem link={"/search/"} name={"Find"} />*/}
                     <NavLiItem link={getCategoryUrl(VendorType.Photographer)}
                                name={"Photographers"} />
-                    <NavLiItem link={getCategoryUrl(VendorType.Caterer)}
-                               name={getVendorTypeInfo(VendorType.Caterer).headerTextPlural} />
-                    <NavLiItem link={getCategoryUrl(VendorType.BandsDj)}
-                               name={getVendorTypeInfo(VendorType.BandsDj).headerTextPlural} />
+                    <NavLiItem link={getCategoryUrl(VendorType.Venue)}
+                               name={getVendorTypeInfo(VendorType.Venue).headerTextPlural} />
+                    <NavLiItem link={getCategoryUrl(VendorType.Jewellery)}
+                               name={getVendorTypeInfo(VendorType.Jewellery).headerTextPlural} />
                     <NavLiItem link={getCategoryUrl(VendorType.BeautyProfessional)}
                                name={"Makeup Artist"} />
 

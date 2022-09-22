@@ -81,8 +81,8 @@ function getSiteMapObjects() {
             link: linkify(getCategoryUrl(VendorType.Florist))
         },
         {
-            name: getVendorTypeInfo(VendorType.BandsDj).headerTextPlural,
-            link: linkify(getCategoryUrl(VendorType.BandsDj))
+            name: getVendorTypeInfo(VendorType.Jewellery).headerTextPlural,
+            link: linkify(getCategoryUrl(VendorType.Jewellery))
         }
     ];
 }

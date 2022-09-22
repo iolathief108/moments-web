@@ -180,7 +180,7 @@ export function DeskopView({ data }: { data: VendorDetailsBQuery }) {
 
     const getVideoGallery = (): VideoUrl[] => {
         switch (data.vendorDetailsB.vendor_type) {
-            case VendorType.BandsDj:
+            case VendorType.Jewellery:
                 return data.vendorDetailsB.vendorTypes?.band_djs_type?.videoSample;
             case VendorType.Videographer:
                 return data.vendorDetailsB.vendorTypes?.videographer_type?.videoSample;
@@ -244,7 +244,7 @@ const CusPaging = (index: number) => {
 function MobileView({ data }: { data: VendorDetailsBQuery }) {
     const getVideoGallery = (): VideoUrl[] => {
         switch (data.vendorDetailsB.vendor_type) {
-            case VendorType.BandsDj:
+            case VendorType.Jewellery:
                 return data.vendorDetailsB.vendorTypes?.band_djs_type?.videoSample;
             case VendorType.Videographer:
                 return data.vendorDetailsB.vendorTypes?.videographer_type?.videoSample;
@@ -278,7 +278,7 @@ function MobileView({ data }: { data: VendorDetailsBQuery }) {
 export function VideoGallery({ data }: { data: VendorDetailsBQuery }) {
     const getTitle = () => {
         switch (data.vendorDetailsB.vendor_type) {
-            case VendorType.BandsDj:
+            case VendorType.Jewellery:
                 return "Performance Samples";
             case VendorType.Videographer:
                 return "Wedding Video Samples";

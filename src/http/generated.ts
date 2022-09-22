@@ -609,7 +609,7 @@ export type VendorProfile = {
 };
 
 export enum VendorType {
-  BandsDj = 'bands_dj',
+  Jewellery = 'bands_dj',
   BeautyProfessional = 'beauty_professional',
   CakesDessert = 'cakes_dessert',
   Caterer = 'caterer',

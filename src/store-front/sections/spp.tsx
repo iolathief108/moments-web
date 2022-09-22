@@ -24,7 +24,7 @@ export default function SppView({ data }: { data: VendorDetailsBQuery }) {
                 PackageContainer(data.vendorDetailsB.vendorTypes.videographer_type.pricing, data.vendorDetailsB.business_name)
             }
             {
-                data.vendorDetailsB.vendor_type === VendorType.BandsDj &&
+                data.vendorDetailsB.vendor_type === VendorType.Jewellery &&
                 PackageContainer(data.vendorDetailsB.vendorTypes.band_djs_type.pricing, data.vendorDetailsB.business_name)
             }
             {
