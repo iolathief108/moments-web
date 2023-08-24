@@ -51,8 +51,6 @@ function NavThing({ history }: RouteComponentProps) {
                                name={getVendorTypeInfo(VendorType.Jewellery).headerTextPlural} />
                     <NavLiItem link={getCategoryUrl(VendorType.BeautyProfessional)}
                                name={"Makeup Artist"} />
-
-
                     <li className="nav-item dropdown">
                         <Link to={"/search/"} className="nav-link dropdown-toggle" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">
@@ -69,6 +67,11 @@ function NavThing({ history }: RouteComponentProps) {
                                 ))
                             }
                         </ul>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/search/"} className="nav-link" id={"search-icon"}>
+                            <i className="fas fa-search" />
+                        </Link>
                     </li>
                 </ul>
                 <a href="/become-a-vendor" target={isDev ? undefined : "_blank"}

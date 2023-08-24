@@ -18,6 +18,7 @@ export const getEnvironmentByHostname = function getEnvironmentByHostname() {
             return EnvironmentTypes.DEVELOPMENT;
 
         case 'www.moments.lk':
+        case 'moments.lk':
         case 'moments.com':
             return EnvironmentTypes.PRODUCTION;
         default:

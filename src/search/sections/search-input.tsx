@@ -36,22 +36,21 @@ export function SearchInput() {
 
     const router = useHistory();
 
-    async function onSearchClick() {
 
+    async function onSearchClick() {
         let searchString: string = getVendorTypeInfo(vendorTypeLocal)?.slugPlural || "";
         searchString = searchString + (searchString && districtKeyLocal ? "--" + districtKeyLocal : "");
         if (!searchString)
             searchString = searchString || districtKeyLocal || "";
-
         if (vTypeG) {
             searchState.setGlobalState("vendorType", vendorTypeLocal);
         }
         if (districtKey && locHook.data) {
             searchState.setGlobalState("districtKey", districtKeyLocal);
         }
-
         await router.push("/search/" + searchString);
     }
+
 
     const Line = styled.div`
       @media (min-width: 767px) {

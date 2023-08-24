@@ -161,8 +161,8 @@ export function titleCase(s: string) {
 
 export function getBaseUrl() {
     if (isDev) {
-        return "https://www.moments.lk";
-        // return "";
+        return "";
+        // return "https://www.moments.lk";
     }
     return "";
 }

@@ -17,3 +17,8 @@ add removed dependencies to your package.json
 
 ### static module build
 yarn export
+
+
+
+## Important
+even in dev mode this site should served from nginx otherwise will not work
